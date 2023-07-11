@@ -4,7 +4,7 @@ import Login from './Components/Login/Login';
 import Admin from './Components/Admin/Admin';
 import User from './Components/UserPage/User';
 import { DataProvider } from './Data/DataContext';
-
+import CustomNav from './Components/CustomNav/CustomNav';
 function App() {
   return (
     <div className="App">
@@ -14,6 +14,15 @@ function App() {
         <Route path='/admin' element={<Admin/>} />
         <Route path='/user' element={<User/>} />
       </Routes>
+      <CustomNav
+      li={[
+        ["Dashboard", "img/dashboard.svg"],
+        ["Restautant’s", "img/restaurant.svg"],
+        ["Manage User’s", "img/manage user.svg"],
+        ["Manage Order’s", "img/manage  order.svg"],
+        ["Manage Coupon’s", "img/manage coupon.svg"]
+      ]}
+    />
       </DataProvider>
     </div>
   );
