@@ -7,6 +7,9 @@ import validator from "validator";
 function Login() {
 
     const navigate = useNavigate();
+
+    
+
   const [isChecked, setIsChecked] = useState(true);
   const toggleCheckBox = () => {
     setIsChecked(!isChecked);
@@ -16,6 +19,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
+  const [confirm, setConfirm] = useState("");
   const {auth, setAuth } = useContext(DataContext);
   const [focused, setFocused] = React.useState(false)
   const onFocus = () => setFocused(true)
@@ -71,8 +75,7 @@ function Login() {
     axios.post("https://localhost:7292/api/Users",{
         Email:email,
         Password:password,  
-        Name:userName,
-        usertype:"User"
+        Name:userName
     }).then((response)=>{
         alert(response.data);
     });
@@ -94,6 +97,7 @@ function Login() {
             <label className="login-lable" htmlFor="chk" aria-hidden="true">Sign up</label>
             <input className="login-input" value={email} type="email" name="email" placeholder="Email" required onChange={(event) => {setEmail(event.target.value);}} />
             <input className="login-input" value={password} type="password" name="pswd" placeholder="Password" required onChange={(event) => {setPassword(event.target.value);}} />
+            <input className="login-input" value={confirm} type="password" name="pswd" placeholder="Confirm Password" required onChange={(event) => {setConfirm(event.target.value);}} />
             <input className="login-input" value={userName} type="text" name="username" placeholder="Enter your Name" required onChange={(event) => {setUserName(event.target.value);}} />
           </form>
             <button className="login-button" onClick={signup}>Sign up</button>
