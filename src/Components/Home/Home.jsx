@@ -1,28 +1,19 @@
 import React, {useState, useContext,useEffect } from 'react'
 import DataContext from '../../Data/DataContext'
 import { useNavigate } from 'react-router-dom';
+import Login from '../Login/Login';
+import Nav from "../../Nav/Nav"
 
-const User = () => {
+const Home = () => {
   const navigate = useNavigate();
   const {auth} = useContext(DataContext);
-  useEffect(()=>{
-    if(auth!=="User")
-    {
-      navigate("/")
-    }
-    else{
-      navigate("/drag")
-    }
-  },[])
+
 
 
   
   return (
-    <div>
-      <h1>User page </h1>
-      
-    </div>
+    <>{!auth?<Login/>:<Nav/>}</>
   )
 }
 
-export default User
+export default Home

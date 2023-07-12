@@ -7,7 +7,7 @@ export const DataProvider = ({children}) => {
 
     const [auth, setAuth] = useState("");
     const [userList, setUserList] = useState([]);
-
+    
     useEffect(()=>{
         axios.get("https://localhost:7292/api/Users").then((response)=>{
             console.log(response);
@@ -18,8 +18,8 @@ export const DataProvider = ({children}) => {
     return (
         <DataContext.Provider value={{
             auth, setAuth,
-            userList, setUserList            
-
+            userList, setUserList,
+            
         }}>{children}</DataContext.Provider>
       )
 }

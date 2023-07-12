@@ -5,11 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import validator from "validator";
 function Login() {
-
-    const navigate = useNavigate();
-
-    
-
+  const navigate = useNavigate();
   const [isChecked, setIsChecked] = useState(true);
   const toggleCheckBox = () => {
     setIsChecked(!isChecked);
@@ -20,7 +16,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
   const [confirm, setConfirm] = useState("");
-  const {auth, setAuth } = useContext(DataContext);
+  const {auth, setAuth, setToggle } = useContext(DataContext);
   const [focused, setFocused] = React.useState(false)
   const onFocus = () => setFocused(true)
   const onBlur = () => setFocused(false)
@@ -52,6 +48,7 @@ function Login() {
       }).then((response) => {
         if(response.data==="Admin")
         {
+          
           setAuth("Admin")
           console.log(response.data);
           navigate("/admin")
@@ -59,6 +56,7 @@ function Login() {
         }
         else if(response.data==="User")
         {
+          
           setAuth("User")
           console.log(response.data);
           navigate("/user")            
@@ -66,6 +64,7 @@ function Login() {
         else{
             alert(response.data)
         }
+        
             
       });
 
