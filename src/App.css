@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto&display=swap');
+
 .App {
   margin: 0;
   padding: 0;
@@ -7,4 +9,47 @@
 html,body{
   margin: 0;
   padding: 0;
+}
+
+input {
+  font-size: 14px;
+  border: 1px solid #777676;
+  border-radius: 5px;
+  font-family: 'Poppins', sans-serif;
+  
+}
+label{
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+}
+
+.SUBMIT{
+  background-color: #091644;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.SUBMIT:hover{
+  cursor: pointer;
+  background-color: #1c55be;  
+}
+
+textarea{
+  /* width: 560px; */
+  margin: 0 15px;
+  /* height: 200px; */
+  font-size: 14px;
+  border: 1px solid #777676;
+  border-radius: 5px;
+  font-family: 'Poppins', sans-serif;
+
 }

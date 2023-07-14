@@ -1,0 +1,89 @@
+.detailed-idea-container {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 20px;
+
+  background-color: #d1d4e3;
+
+  width: 40%;
+
+  margin-left: 25%;
+
+  padding: 50px 30px;
+
+  border-radius: 5px;
+}
+
+.detailed-idea-container > h1 {
+  border: 1.5px solid black;
+
+  font-weight: 500;
+
+  border-radius: 5px;
+
+  padding: 10px;
+}
+
+.detailed-idea-description:hover {
+  border: 1.5px solid black;
+
+  border-radius: 5px;
+
+  padding: 10px;
+}
+
+.detailed-idea-time {
+  font-style: italic;
+}
+
+.detailed-idea-approval {
+  font-style: italic;
+
+  font-weight: 500;
+}
+
+.detailed-idea-assigneeCont {
+  display: flex;
+
+  gap: 30px;
+
+  align-items: center;
+}
+
+.detailed-idea-image {
+  width: 50px;
+
+  height: 50px;
+
+  border-radius: 50%;
+
+  background-color: #0070c0;
+}
+
+.detailed-idea-People {
+  display: flex;
+
+  justify-content: space-between;
+}
+
+.detailed-idea-ApprovalCont {
+  display: flex;
+
+  gap: 40px;
+}
+
+.edit {
+  margin-left: 89%;
+
+  background-color: #091644;
+
+  color: white;
+
+  padding: 10px 15px;
+
+  border: 0;
+
+  border-radius: 30px;
+}
