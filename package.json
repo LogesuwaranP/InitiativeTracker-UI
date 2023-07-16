@@ -12,7 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "boxicons": "^2.1.4",
-    "formik": "^2.2.9",
+    "formik": "^2.4.2",
     "multiselect-react-dropdown": "^2.0.25",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
