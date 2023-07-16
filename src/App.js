@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="App">    
       <DataProvider>
-        <Nav/>
+        {/* <Nav/> */}
         {/* <Home/> */}
       <Routes>
         <Route path='/drag' element={<DragAndDrop/>}/>

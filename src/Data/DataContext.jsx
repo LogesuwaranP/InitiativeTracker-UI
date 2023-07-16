@@ -28,13 +28,13 @@ export const DataProvider = ({children}) => {
     }
     
     
-    useEffect(()=>{
-        axios.get("https://localhost:7292/api/Users").then((response)=>{
-            console.log(response);
-            setUserList(response.data);
-        })
+    // useEffect(()=>{
+    //     axios.get("https://localhost:7292/api/Users").then((response)=>{
+    //         console.log(response);
+    //         setUserList(response.data);
+    //     })
 
-    },[])
+    // },[])
 
     function asign1(data) {
         var array = [];
@@ -62,18 +62,18 @@ export const DataProvider = ({children}) => {
         setColumn2Items(array);        
     }
 
-    useEffect(()=>{
-        axios.get("https://64af058ec85640541d4e0a7b.mockapi.io/tracker/tracker").then((response)=>{
-            console.log(response.data);
-            asign1(response.data);            
-        })
+    // useEffect(()=>{
+    //     axios.get("https://64af058ec85640541d4e0a7b.mockapi.io/tracker/tracker").then((response)=>{
+    //         console.log(response.data);
+    //         asign1(response.data);            
+    //     })
 
-        axios.get("https://64af058ec85640541d4e0a7b.mockapi.io/tracker/progress").then((response)=>{
-            console.log(response.data);
-            asign2(response.data);            
-        })
+    //     axios.get("https://64af058ec85640541d4e0a7b.mockapi.io/tracker/progress").then((response)=>{
+    //         console.log(response.data);
+    //         asign2(response.data);            
+    //     })
 
-    },[])
+    // },[])
     return (
         <DataContext.Provider value={{
             auth, setAuth,

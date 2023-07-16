@@ -1,9 +1,47 @@
 import React,{useContext} from 'react'
 import "./SignUp.css"
-import DataContext from '../../Data/DataContext';
 
+import DataContext from '../../Data/DataContext';
+import { signUpSchema } from "../validation/Validation";
+import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 const SignUp = () => {
-  const {setEmail, setUserName, setPassword, setConfirmPassword, setToggle, checkValues} = useContext(DataContext);
+    const navigate = useNavigate();
+  const {setEmail, setUserName, setPassword, setConfirmPassword, setToggle, checkValues, email, password,confirmPassword,name} = useContext(DataContext);
+  const initialValues = {
+    email: "",
+    password: "",
+    confirmPassword:"",
+    name:""
+  };
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues,
+      validationSchema: signUpSchema,
+      onSubmit: (values, action) => {
+        values.email = email;
+        values.password = password;
+        values.confirmPassword=confirmPassword;
+        values.name=name;
+        action.resetForm();
+      },
+    });
+
+
+    function finalCheck(e) {
+       handleBlur(e);
+       handleSubmit(e);
+       if(errors.email||errors.password||errors.confirmPassword||errors.name)   
+       {
+
+       }
+       else
+       {
+          if(!email)
+          navigate("/drag");
+       }
+       
+    }
   return (
     <div className='signup-container'>
         <div>
@@ -12,19 +50,70 @@ const SignUp = () => {
         <div className='signup-input'>
             <form action="">
                 <label htmlFor="Name">Email </label>
-                <input placeholder='E-mail' type='email' onChange={(e)=>setEmail(e.target.value)}/>
-            </form>
-            <form action="">
+                <input
+                required
+            placeholder="E-mail"
+            type="email"
+            name="email"
+            id="email"
+            value={values.email}
+            onChange={(e) => {
+              handleChange(e);
+              setEmail(e.target.value);
+            }}
+            onBlur={handleBlur}
+            style={errors.email && touched.email ? { borderColor: "red" } : {}}
+          />
+          {errors.email && touched.email ? (
+            <p className="ERROR">{errors.email}</p>
+          ) : null}
+
                 <label htmlFor="Name">User Name</label>
-                <input placeholder='User Name' type='name' onChange={(e)=>setUserName(e.target.value)}/>
-            </form>
-            <form action="">
-                <label htmlFor="Name">Password</label>
-                <input placeholder='Password' type='password' onChange={(e)=>setPassword(e.target.value)}/>
-            </form>
-            <form action="">
+                <input placeholder='User Name' type='name'  name="name"
+            id="name"
+            value={values.name}
+            onChange={(e) => {
+              handleChange(e);
+              setUserName(e.target.value);
+            }}
+            onBlur={handleBlur}
+            style={errors.name && touched.name ? { borderColor: "red" } : {}}/>
+         {errors.name && touched.name ? (
+            <p className="ERROR">{errors.name}</p>
+          ) : null}
+          <label htmlFor="Name">Password</label>
+          <input
+            required
+            placeholder="Password"
+            type="password" name="password"
+            id="password"
+            value={values.password}
+            onChange={(e) => {
+              handleChange(e);
+              setPassword(e.target.value);
+            }}
+            onBlur={handleBlur}
+            style={errors.password && touched.password ? { borderColor: "red" } : {}}
+          />  {errors.password && touched.password ? (
+
+            <p className="ERROR">{errors.password}</p>
+
+        ) : null}
                 <label htmlFor="Name">Confirm Password</label>
-                <input placeholder='confirm Password' type='password' onChange={(e)=>setConfirmPassword(e.target.value)}/>
+                <input placeholder='confirm Password' type='password' name="confirmPassword"
+            id="confirmPassword"
+            value={values.confirmPassword}
+            onChange={(e) => {
+              handleChange(e);
+              setConfirmPassword(e.target.value);
+            }}
+            onBlur={handleBlur}
+            style={errors.confirmPassword && touched.confirmPassword ? { borderColor: "red" } : {}}
+          />  {errors.confirmPassword && touched.confirmPassword ? (
+
+            <p className="ERROR">{errors.confirmPassword}</p>
+
+        ) : null}
             </form>
             
         </div>
@@ -33,7 +122,7 @@ const SignUp = () => {
                 <input type='checkbox'/>
                 <p>Accept Terms & Conditions</p>
             </div>
-            <div className='SUBMIT register' onClick={checkValues}>Register</div>
+            <div className='SUBMIT register' onClick={finalCheck}>Register</div>
         </div>
         <div>
             <p>Already Registered? <span className='LINK' onClick={()=>setToggle(true)}>Login here</span></p>

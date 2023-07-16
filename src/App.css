@@ -35,7 +35,10 @@ form{
   flex-direction: column;
   
 }
-
+.ERROR{
+  font-size: 12px;
+  color: red;
+}
 .SUBMIT{
   background-color: #091644;
   font-family: 'Poppins', sans-serif;
