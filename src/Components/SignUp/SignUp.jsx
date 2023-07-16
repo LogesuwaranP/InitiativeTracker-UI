@@ -31,13 +31,14 @@ const SignUp = () => {
     function finalCheck(e) {
        handleBlur(e);
        handleSubmit(e);
-       if(errors.email||errors.password )   
+       if(errors.email||errors.password||errors.confirmPassword||errors.name)   
        {
 
        }
        else
        {
-          navigate("/");
+          if(!email)
+          navigate("/drag");
        }
        
     }
@@ -50,6 +51,7 @@ const SignUp = () => {
             <form action="">
                 <label htmlFor="Name">Email </label>
                 <input
+                required
             placeholder="E-mail"
             type="email"
             name="email"
@@ -81,6 +83,7 @@ const SignUp = () => {
           ) : null}
           <label htmlFor="Name">Password</label>
           <input
+            required
             placeholder="Password"
             type="password" name="password"
             id="password"
