@@ -1,13 +1,14 @@
 import React,{useContext} from 'react'
 import "./SignUp.css"
-
 import DataContext from '../../Data/DataContext';
 import { signUpSchema } from "../validation/Validation";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+
 const SignUp = () => {
     const navigate = useNavigate();
-  const {setEmail, setUserName, setPassword, setConfirmPassword, setToggle, checkValues, email, password,confirmPassword,name} = useContext(DataContext);
+  const {setEmail, setUserName, setPassword, setConfirmPassword, setToggle, checkValues, email, password,confirmPassword,userName} = useContext(DataContext);
   const initialValues = {
     email: "",
     password: "",
@@ -22,23 +23,39 @@ const SignUp = () => {
         values.email = email;
         values.password = password;
         values.confirmPassword=confirmPassword;
-        values.name=name;
+        values.name=userName;
         action.resetForm();
       },
     });
 
 
     function finalCheck(e) {
-       handleBlur(e);
-       handleSubmit(e);
-       if(errors.email||errors.password||errors.confirmPassword||errors.name)   
+      //  handleBlur(e);
+      //  handleSubmit(e);
+       if(errors.email||errors.password||errors.confirmPassword||errors.email)   
        {
+        console.log("in is");
 
        }
        else
        {
-          if(!email)
-          navigate("/drag");
+        console.log(email);
+          if(email)
+          {
+            console.log("email");
+            axios.post("https://localhost:7265/api/User",
+            {
+              userName:userName,
+              email:email,
+              password:password
+            } ).then((response)=>{
+                console.log(response.data);
+                navigate("/drag");
+                //setUserList(response.data);
+            })
+            
+          }
+          
        }
        
     }

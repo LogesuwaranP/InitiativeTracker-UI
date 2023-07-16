@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
 
   const navigate = useNavigate();
-  const { setEmail, setPassword, setToggle, checkValues, email, password } =
+  const { setEmail, setPassword, setToggle, checkValues, email, password, authUser } =
     useContext(DataContext);
   const initialValues = {
     email: "",
@@ -27,15 +27,16 @@ const Login = () => {
 
 
     function finalCheck(e) {
-       handleBlur(e);
-       handleSubmit(e);
+      //  handleBlur(e);
+      //  handleSubmit(e);
        if(errors.email||errors.password )   
        {
 
        }
        else
        {
-          navigate("/");
+        console.log("hello");
+          authUser();
        }
        
     }

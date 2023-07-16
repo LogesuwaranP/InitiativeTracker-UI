@@ -28,13 +28,29 @@ export const DataProvider = ({children}) => {
     }
     
     
-    // useEffect(()=>{
-    //     axios.get("https://localhost:7292/api/Users").then((response)=>{
-    //         console.log(response);
-    //         setUserList(response.data);
-    //     })
+    useEffect(()=>{
+        axios.get("https://localhost:7265/api/User").then((response)=>{
+             console.log(response.data);
+            // setUserList(response.data);
+        })
 
-    // },[])
+    },[])
+
+    function authUser() {
+        axios.post("https://localhost:7265/auth",
+        {
+            userName:"Logesuwaran",
+            email:email,
+            password:password
+        } ).then((response)=>{
+            console.log(response.data[0]);
+            setAuth(response.data[0])
+            if(response.data[0].role)
+             navigate("/drag");
+        })
+
+        
+    }
 
     function asign1(data) {
         var array = [];
@@ -87,7 +103,7 @@ export const DataProvider = ({children}) => {
             email, setEmail,
             password, setPassword,
             confirmPassword, setConfirmPassword,
-            checkValues,
+            checkValues,authUser,
             toggle, setToggle
 
 
