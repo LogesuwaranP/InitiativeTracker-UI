@@ -1,18 +1,31 @@
 import axios from 'axios';
 import React, {useState, createContext, useEffect  } from 'react';
 import IdeaCard from '../Components/Card/IdeaCard';
+import { useNavigate } from 'react-router-dom';
 
 const DataContext =   createContext({});
 
 export const DataProvider = ({children}) => {
+    const navigate = useNavigate();
 
-    const [auth, setAuth] = useState("");
+    const [auth, setAuth] = useState("User");
     const [userList, setUserList] = useState([]);
     const [column1Items, setColumn1Items] = useState([]);
     const [column2Items, setColumn2Items] = useState([]);
     const [column3Items, setColumn3Items] = useState([<IdeaCard/>, <IdeaCard/>]);
     const [column4Items, setColumn4Items] = useState([]);
     const [column5Items, setColumn5Items] = useState([<IdeaCard/>, <IdeaCard/>]);
+    const [userName , setUserName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const[toggle, setToggle] = useState(true);
+
+    function checkValues() {
+        console.log("Values checking from context");
+        navigate("/drag")
+        console.log("user signup==="+"email:"+email+"-userName:"+userName+"-password"+password+"-confirmPassword"+confirmPassword)
+    }
     
     
     useEffect(()=>{
@@ -31,6 +44,7 @@ export const DataProvider = ({children}) => {
                 Title={item.Title}
                 Status={item.Status}
                 />);
+                return 1;
         })
         setColumn1Items(array);        
     }
@@ -43,6 +57,7 @@ export const DataProvider = ({children}) => {
                 Title={item.Title}
                 Status={item.Status}
                 />);
+                return 1;
         })
         setColumn2Items(array);        
     }
@@ -68,7 +83,14 @@ export const DataProvider = ({children}) => {
             column3Items, setColumn3Items,
             column4Items, setColumn4Items,
             column5Items, setColumn5Items,
-            
+            userName , setUserName,
+            email, setEmail,
+            password, setPassword,
+            confirmPassword, setConfirmPassword,
+            checkValues,
+            toggle, setToggle
+
+
         }}>{children}</DataContext.Provider>
       )
 }

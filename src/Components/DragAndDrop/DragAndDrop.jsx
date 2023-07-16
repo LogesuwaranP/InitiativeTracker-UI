@@ -101,7 +101,7 @@ const DragAndDrop = () => {
   };
 
   return (
-    <div className="drag-wrap">
+    <div className="scrolling-wrapper-flexbox">
       {toggle?<CreateIdea setToggle={setToggle}/>:<button className="btn-create" onClick={()=>{setToggle(true)}}>Create</button>}
     
     <div className="container">

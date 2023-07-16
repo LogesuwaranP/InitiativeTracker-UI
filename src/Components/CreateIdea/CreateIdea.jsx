@@ -1,89 +1,52 @@
 import React, { useState } from 'react'
 import "./CreateIdea.css"
-import { useFormik } from "formik";
-import {signUpSchema} from '../validation/Validation';
-import CuzInput from '../CuzInput/CuzInput';
+import TextBox from '../TextBox/TextBox';
+import CheckboxMultiSelect from '../CheckboxMultiSelect/CheckboxMultiSelect';
+
 
 const CreateIdea = ({setToggle}) => {
 
-    const initialValues = {
-      summary: "",
-      title: "",
-      password: "",
-      confirm_password: "",
-    };
-    const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues,
-      validationSchema: signUpSchema,
-      onSubmit: (values, action) => {
-        console.log(values);
-        action.resetForm();
-      },
-    });
+  const [selectedItems, setSelectedItems] = useState([]);
 
-    const[title, setTitle] = useState("");
-    const[summary, setSummary] = useState("");
-    const[description, setDescription] = useState("");
+  const handleChange = (event) => {
+    const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
+    setSelectedItems(selectedOptions);
+    console.log(selectedOptions);
+  };
+
+    
       
     
   return (
-    <div >
-        <div className='create-idea-main overlay'>
-             
-            <form className='create-idea-form' onSubmit={handleSubmit}>
-                <div><div className='cancel' onClick={()=>setToggle(false)}>X</div></div>
-                
-                <div>
-                    <label htmlFor="title" className="input-label">Title</label>
-                    <input
-                        type="text"
-                        autoFocus
-                        autoComplete="off"
-                        name="title"
-                        id="title"
-                        placeholder="Enter Title"
-                        value={values.email}
-                        onChange={(e)=>{handleChange(e);setTitle(e.target.value)}}
-                        onBlur={handleBlur}
-                        style={errors.title && touched.title ?{borderColor:"red"}:{}}
-                    />
-                    {errors.title && touched.title ? (
-                        <p className="form-error">{errors.title}</p>
-                    ) : null}
-
-                </div>
-                <div>
-                    <label htmlFor="summary" className="input-label">Summary</label>
-                    <input type="text"
-                        autoComplete="off"
-                        name="summary"
-                        id="summary"
-                        placeholder="Enter Title"
-                        value={values.summary}
-                        onChange={(e)=>{handleChange(e);setSummary(e.target.value)}}
-                        onBlur={handleBlur}
-                        style={errors.summary && touched.summary ?{borderColor:"red"}:{}}
-                    />
-                    {errors.summary && touched.summary ? (
-                        <p className="form-error">{errors.summary}</p>
-                    ) : null}
-                </div>
-                <div>
-                  <div className='asign'>
-                    <div className='profile'></div>
-                    <h4> Owener</h4>
-                  </div>
-                </div>
-                <div>
-                    <label htmlFor="email" className="input-label">Description</label>
-                    <input />
-                </div>
-                <CuzInput/>
-                <div><button className='submit' onClick={handleSubmit}></button></div>
-            </form>
-           
+    <div className='create-idea-main overlay'>
+      <div className='create-idea-form'>
+        <div className='create-idea-owner'>
+          <div className='profile'></div>
+          <h2>User Name</h2>
         </div>
+        <div className='create-idea-title'>
+          <form action="">
+              <label htmlFor="Name">Enter Title</label>
+              <input placeholder='Enter Title' />
+          </form>          
+        </div>
+        <div className='multiselect-container' >
+            <label>Add Contri</label>
+            <CheckboxMultiSelect />
+        </div>
+        <div className='create-idea-summary'>
+          <label htmlFor="Name">Enter Title</label>
+          <TextBox mxhight={80} mihight={80}/>
+        </div>
+        <div className='create-idea-summary'>
+          <label htmlFor="Name">Enter Title</label>
+          <TextBox mxhight={150} mihight={150}/>
+        </div>
+        <div className='submit-idea'> <div className='SUBMIT'>Create</div> </div>
+
+      </div>
+      
+        
     </div>
   )
 }
