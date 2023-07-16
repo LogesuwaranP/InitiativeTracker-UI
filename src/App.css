@@ -76,3 +76,11 @@ textarea{
   color: #1c55be;
   cursor: pointer;
 }
+
+.NAME-CARD{
+  width: 150px;
+  height: 40px;
+  background-color: #1c55be;
+  border-radius: 30px;
+
+}
