@@ -83,8 +83,8 @@ const SignUp = () => {
           />
           {errors.email && touched.email ? (
             <p className="ERROR">{errors.email}</p>
-          ) : null}
-
+          ) : null} </form>
+          <form>
                 <label htmlFor="Name">User Name</label>
                 <input placeholder='User Name' type='name'  name="name"
             id="name"
@@ -97,8 +97,8 @@ const SignUp = () => {
             style={errors.name && touched.name ? { borderColor: "red" } : {}}/>
          {errors.name && touched.name ? (
             <p className="ERROR">{errors.name}</p>
-          ) : null}
-          <label htmlFor="Name">Password</label>
+          ) : null}</form>
+        <form>   <label htmlFor="Name">Password</label>
           <input
             required
             placeholder="Password"
@@ -115,7 +115,8 @@ const SignUp = () => {
 
             <p className="ERROR">{errors.password}</p>
 
-        ) : null}
+        ) : null}</form>
+        <form>
                 <label htmlFor="Name">Confirm Password</label>
                 <input placeholder='confirm Password' type='password' name="confirmPassword"
             id="confirmPassword"

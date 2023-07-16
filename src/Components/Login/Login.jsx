@@ -51,7 +51,7 @@ const Login = () => {
           dolor.
         </p>
       </div>
-      <div>
+      <div className="login-form">
         <form action="" onSubmit={handleSubmit}>
           <label htmlFor="Name">Email </label>
           <input
@@ -70,7 +70,8 @@ const Login = () => {
           {errors.email && touched.email ? (
             <p className="ERROR">{errors.email}</p>
           ) : null}
-
+        </form>
+        <form>
           <label htmlFor="Name">Password</label>
           <input
             placeholder="Password"
