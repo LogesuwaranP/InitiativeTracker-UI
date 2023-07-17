@@ -1,12 +1,13 @@
 import React from "react";
 
-export default  function TextBox({mxhight,mihight,holder}) {
+export default  function TextBox({mxhight,mihight,holder,value, setValue}) {
     //   var MIN_TEXTAREA_HEIGHT = 32;
       const MIN_TEXTAREA_HEIGHT = mihight?mihight:42;
     
       const textareaRef = React.useRef(null);
-      const [value, setValue] = React.useState("");
+      // const [value, setValue] = React.useState("");
       const onChange = (event) => setValue(event.target.value);
+      // console.log(summary);
     
       React.useLayoutEffect(() => {
         // Reset height - important to shrink on delete

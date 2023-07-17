@@ -1,8 +1,17 @@
 import React from "react";
 import "./DetailedView.css"
 import CommentCard from "../CommentCard/CommentCard";
+import { useLayoutEffect } from "react";
+import { useContext } from "react";
+import DataContext from "../../Data/DataContext";
 
 const DetailedView = () => {
+  const {authMiddleware} = useContext(DataContext);
+  
+  useLayoutEffect(()=>{
+    authMiddleware();
+
+  },[])
   return (
     <div className="detailed-idea-container">
       <div className="detailed-content">

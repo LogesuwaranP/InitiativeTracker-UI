@@ -20,6 +20,19 @@ const CreateIdea = ({setToggle}) => {
     console.log(selectedOptions);
   };
 
+  const[title, setTitle] = useState("");
+  const[summary, setSummary] = useState("");
+  const[discription,setDescription]=useState("");
+  const [contributors,setcontributors]=useState([])
+  const [ideastatus,setideastatus]=useState("")
+  function ck(params) {
+    console.log(summary);
+    console.log(discription);
+    
+  }
+
+  
+
     
       
     
@@ -34,7 +47,7 @@ const CreateIdea = ({setToggle}) => {
         <div className='create-idea-title'>
           <form action="">
               <label htmlFor="Name">Enter Title</label>
-              <input placeholder='Enter Title' />
+              <input placeholder='Enter Title' onChange={(e)=>e.target.value} />
           </form>          
         </div>
         <div className='multiselect-container' >
@@ -43,11 +56,11 @@ const CreateIdea = ({setToggle}) => {
         </div>
         <div className='create-idea-summary'>
           <label htmlFor="Name">Enter Title</label>
-          <TextBox mxhight={80} mihight={80} holder={"Type a summary..."}/>
+          <TextBox mxhight={80} mihight={80} holder={"Type a summary..."} value={summary} setValue={setSummary}/>
         </div>
         <div className='create-idea-summary'>
-          <label htmlFor="Name">Enter Title</label>
-          <TextBox mxhight={150} mihight={150} holder={"Enter your description here ..."}/>
+          <label htmlFor="Name" onClick={ck}>Enter Title</label>
+          <TextBox mxhight={150} mihight={150} holder={"Enter your description here ..."} value={discription} setValue={setDescription} />
         </div>
         <div className='submit-idea'> <div className='SUBMIT'>Create</div> </div>
 

@@ -1,10 +1,19 @@
-import React, { useState,useContext } from "react";
+import React, { useState,useContext,useLayoutEffect } from "react";
 import "./DragAndDrop.css";
 import IdeaCard from "../Card/IdeaCard";
 import DataContext from '../../Data/DataContext'
 import CreateIdea from "../CreateIdea/CreateIdea";
 
+
 const DragAndDrop = () => {
+
+  const {authMiddleware} = useContext(DataContext);
+  useLayoutEffect(()=>{
+    authMiddleware();
+
+  },[])
+  
+
   const[toggle, setToggle] =  useState(false)
   const [draggingItem, setDraggingItem] = useState(null);
   const {

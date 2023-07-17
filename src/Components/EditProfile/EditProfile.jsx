@@ -1,13 +1,25 @@
-import React from 'react'
+import React,{useLayoutEffect,useContext, useState} from 'react'
 import "./EditProfile.css"
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import Badge from '@mui/material/Badge';
 import EmojiObjectsOutlinedIcon from '@mui/icons-material/EmojiObjectsOutlined';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import TextBox from '../TextBox/TextBox';
+import DataContext from '../../Data/DataContext';
+
+
 
 
 const EditProfile = () => {
+
+    const {authMiddleware} = useContext(DataContext);
+    useLayoutEffect(()=>{
+        authMiddleware();
+
+    },[])
+
+    const[bio, setBio] = useState("");
+
   return (
     <div className='editProfile-container'>
         <div className='editProfile-upload'>
@@ -80,7 +92,7 @@ const EditProfile = () => {
                 </form> 
                 <div className='bio'>
                         <label htmlFor="Name">Your Bio</label>
-                        <TextBox mxhight={120} mihight={42}/>                   
+                        <TextBox mxhight={120} mihight={42} value={bio} setValue={setBio}/>                   
                 </div>                  
             </div>
             

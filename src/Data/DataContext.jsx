@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, {useState, createContext, useEffect  } from 'react';
+import React, {useState, createContext, useEffect, useLayoutEffect  } from 'react';
 import IdeaCard from '../Components/Card/IdeaCard';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ const DataContext =   createContext({});
 export const DataProvider = ({children}) => {
     const navigate = useNavigate();
 
-    const [auth, setAuth] = useState("User");
+    const [auth, setAuth] = useState('');
     const [userList, setUserList] = useState([]);
     const [column1Items, setColumn1Items] = useState([]);
     const [column2Items, setColumn2Items] = useState([]);
@@ -20,6 +20,8 @@ export const DataProvider = ({children}) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const[toggle, setToggle] = useState(true);
+    const[summaryText, setSummaryText] = useState("");
+    const[discriptionText,setDescriptionText]=useState("");
 
     function checkValues() {
         console.log("Values checking from context");
@@ -30,11 +32,22 @@ export const DataProvider = ({children}) => {
     
     useEffect(()=>{
         axios.get("https://localhost:7265/api/User").then((response)=>{
-             console.log(response.data);
+            //  console.log(response.data);
             // setUserList(response.data);
         })
-
+        console.log(auth);
     },[])
+
+    function authMiddleware() {
+            console.log(auth);
+            if(!auth)
+            {
+              navigate("/login")
+            }
+            else{
+                console.log(auth);
+            }               
+    }
 
     function authUser() {
         axios.post("https://localhost:7265/auth",
@@ -46,7 +59,11 @@ export const DataProvider = ({children}) => {
             console.log(response.data[0]);
             setAuth(response.data[0])
             if(response.data[0].role)
-              navigate("/");
+            {
+                console.log("in user");
+                navigate("/");
+            }
+             
         })
 
         
@@ -103,8 +120,12 @@ export const DataProvider = ({children}) => {
             email, setEmail,
             password, setPassword,
             confirmPassword, setConfirmPassword,
-            checkValues,authUser,
-            toggle, setToggle
+            checkValues,authMiddleware,
+            toggle, setToggle,
+            authUser,
+            summaryText, setSummaryText,
+            discriptionText,setDescriptionText
+            
 
 
         }}>{children}</DataContext.Provider>
