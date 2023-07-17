@@ -34,7 +34,6 @@ const SignUp = () => {
       //  handleSubmit(e);
        if(errors.email||errors.password||errors.confirmPassword||errors.email)   
        {
-        console.log("in is");
 
        }
        else
@@ -42,7 +41,6 @@ const SignUp = () => {
         console.log(email);
           if(email)
           {
-            console.log("email");
             axios.post("https://localhost:7265/api/User",
             {
               userName:userName,
@@ -50,7 +48,7 @@ const SignUp = () => {
               password:password
             } ).then((response)=>{
                 console.log(response.data);
-                navigate("/drag");
+                navigate("/");
                 //setUserList(response.data);
             })
             

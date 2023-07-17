@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, {useState, createContext, useEffect, useLayoutEffect  } from 'react';
 import IdeaCard from '../Components/Card/IdeaCard';
 import { useNavigate } from 'react-router-dom';
+import errors from 'validators/lib/errors';
 
 const DataContext =   createContext({});
 
@@ -50,21 +51,25 @@ export const DataProvider = ({children}) => {
     }
 
     function authUser() {
+
         axios.post("https://localhost:7265/auth",
         {
-            // userName:"Logesuwaran",
             email:email,
             password:password
-        } ).then((response)=>{
-            console.log(response.data[0]);
-            setAuth(response.data[0])
-            if(response.data[0].role)
+        }).then((response)=>{
+            console.log(response);
+            setAuth(response.data)
+            if(response.data)
             {
                 console.log("in user");
                 navigate("/");
-            }
-             
+            } 
+        }).catch((errors)=>{
+            alert(errors.response.data)
         })
+
+                  
+         
 
         
     }
