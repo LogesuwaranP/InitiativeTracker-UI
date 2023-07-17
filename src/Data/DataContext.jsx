@@ -39,14 +39,14 @@ export const DataProvider = ({children}) => {
     function authUser() {
         axios.post("https://localhost:7265/auth",
         {
-            userName:"Logesuwaran",
+            // userName:"Logesuwaran",
             email:email,
             password:password
         } ).then((response)=>{
             console.log(response.data[0]);
             setAuth(response.data[0])
             if(response.data[0].role)
-             navigate("/drag");
+              navigate("/");
         })
 
         

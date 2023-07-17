@@ -1,0 +1,96 @@
+.usercard-container{
+    background-color: #D1D4E3;
+    width: 100vw;
+    height: 100vh;
+}
+
+.usercard-upload{
+    height: 65vh;
+    width: 330px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+      
+    
+}       
+
+.bio{
+    width: 98%;
+    margin: 15px;    
+}
+
+
+.upload-photo{
+    width: 150px;
+    padding: 10px;
+    text-align: center;
+    margin: 30px auto 10px;
+}
+
+.picture{
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 10px auto ;
+    border-color: #091644;
+}
+
+
+.picture>img{
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: auto;
+    padding: 10px;
+    background-color: #c4d1ffae;
+}
+
+.usercard-icons{
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 110px;
+}
+
+.date-input{
+    padding: 5px;
+}
+
+
+.usercard-usertype{
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+        
+}
+
+
+/* .usercard-footer{
+    
+   
+    
+} */
+
+.size-message{
+    width: 90%;
+    height: 80px;
+    background-color: #D1D4E3;
+    margin: 5px auto;
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: 500;    
+}
+
+
+
+.update-info{
+    width: 150px;
+    padding: 10px;
+    text-align: center;
+    margin-left: 15px;    
+}

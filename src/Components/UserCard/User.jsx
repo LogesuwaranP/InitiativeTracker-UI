@@ -1,65 +1,46 @@
-// import React from 'react'
+import React from 'react'
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import Badge from '@mui/material/Badge';
+import EmojiObjectsOutlinedIcon from '@mui/icons-material/EmojiObjectsOutlined';
+import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
+import './User.css'
 
-// const User = () => {
-//   return (
-//     <div>
-//       <div class="drop"><select required class="dropdown">
+const User = () => {
 
+  return (
+    <div className='usercard-container'>
+            <div className='usercard-upload'>
+            <div>
+                <h2>User Name</h2>
+                <div className='usercard-usertype'>
+                    <ManageAccountsOutlinedIcon/>
+                    <p> User</p>
+                </div>
+                
 
+            </div>
+            
+            <div className='picture'> 
+                <img src='https://i.pinimg.com/originals/b3/2c/9c/b32c9c4854abc5925c2d64ee046f02f7.jpg'></img>
+            </div>
+            <div className='usercard-icons'>
+                <Badge badgeContent={4} color="primary">
+                    <StarBorderIcon />
+                </Badge>
+                <Badge badgeContent={10} color="primary">
+                    <EmojiObjectsOutlinedIcon/>
+                </Badge>
+                
+            </div>
+            <div className='SUBMIT upload-photo'>Update Profile</div>
+            <div className='size-message'> Upload Your Display Picture less than 2MB</div>
+            <p>Member Since 07/15/2023</p>
 
+        </div>
 
-// <option value="Approved" class="value">Approved</option>
+    </div>
 
+  )
+}
 
-
-
-// <option value="Rejected" class="value">Rejected</option>
-
-
-
-
-// <option value="Pending" class="value">Pending</option>    </select></div>
-
-
-
-
-// <div class="cardCont" >
-
-
-
-
-// <div class="card" >
-
-
-
-
- 
-
-//   <div class="img"><img src=""/></div>
-
-// <h3 class="Id"><span class="id"></span><b></b></h3> 
-
-
-
-
-// <div class="text"><h3 > <b></b></h3>
-
-
-
-
-// <h3 style="font-size: 13px;" ></h3>
-
-// <h3 style="font-size: 13px;"  ></h3></div>
-
-// <div style="text-align: center;"><p></p></div>
-
-// <div class="icon" ><div><button  class="done" ><mat-icon >done</mat-icon></button></div>
-
-// <div><button class="close"><mat-icon>close</mat-icon></button></div></div>
-
-// <div class="Role"><button class="edit">Edit</button>
-//     </div>
-//   )
-// }
-
-// export default User
+export default User

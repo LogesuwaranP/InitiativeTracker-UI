@@ -1,6 +1,6 @@
 import React from "react";
 
-export default  function TextBox({mxhight,mihight}) {
+export default  function TextBox({mxhight,mihight,holder}) {
     //   var MIN_TEXTAREA_HEIGHT = 32;
       const MIN_TEXTAREA_HEIGHT = mihight?mihight:42;
     
@@ -39,6 +39,7 @@ export default  function TextBox({mxhight,mihight}) {
             resize: "none",
             overflowY:'auto'
           }}
+          placeholder={holder}
           value={value}
         />
       );
