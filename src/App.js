@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import  { DataProvider } from './Data/DataContext';
 import NewIdea from './Components/NewIdea/NewIdea';
-
+import UserPage from "./Components/User/UserPage"
 import DragAndDrop from './Components/DragAndDrop/DragAndDrop';
 import DetailedView from './Components/DetailedView/DetailedView';
 import EditProfile from './Components/EditProfile/EditProfile';
@@ -30,6 +30,7 @@ function App() {
         <Route path='/login' element={<Authentication/>}/>
         <Route path='/idea-detailes/:id' element={<DetailedView/>}/>
         <Route path="/profile-edit" element={<EditProfile/>}/>
+        <Route path='/users' element={<UserPage/>}/>
         <Route path='/profile' element={<Profile/>}/>
         
       </Routes>

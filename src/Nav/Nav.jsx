@@ -80,7 +80,8 @@ const Sidebar = () => {
               </li>
             </ul>
           </li>
-  
+
+          <Link to="/users">  
           <li>
             <a href="#">
               <i className="bx bx-history"></i>
@@ -96,6 +97,7 @@ const Sidebar = () => {
               </li>
             </ul>
           </li>
+          </Link>
   
           <li>
             <a href="#">

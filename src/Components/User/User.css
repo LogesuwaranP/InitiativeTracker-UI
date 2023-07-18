@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto&display=swap");
+
+.usercard-content {
+  height: 330px;
+
+  width: 240px;
+
+  background-color: #fff;
+
+  color: #091644;
+
+  border-radius: 2px;
+
+  justify-content: space-around;
+  padding: 0 30px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+  margin-bottom: 20px;
+  
+
+}
+
+.usercard-name {
+  font-family: "Poppins", sans-serif;
+
+  margin-top: 5px;
+}
+
+.usercard-mail {
+  font-family: "Roboto", sans-serif;
+
+  font-size: small;
+
+  height: 30px;
+
+  display: flex;
+
+  justify-content: center;
+
+  /* background-color: bisque; */
+}
+
+.usercard-img {
+  height: 110px;
+  width: 110px;
+  margin: auto;
+  background-color: #889bd8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* background-color: aqua; */
+}
+
+.usercard-userimg {
+  /* border: 3px solid #889bd8; */
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+
+.usercard-icon {
+  height: 50px;
+
+  display: flex;
+
+  justify-content: center;
+
+  /* background-color: bisque; */
+
+  gap: 40px;
+}
+
+.usercard-bio {
+  display: flex;
+  font-size: 13px;
+  text-align: left;
+  align-items: center;
+  margin: 10px auto;
+
+
+  /* background-color: aqua; */
+
+  font-family: "Roboto", sans-serif;
+}
+
+.usercard-button {
+  margin: 10px;
+
+  display: flex;
+
+  justify-content: center;
+
+  /* background-color: bisque; */
+}
+
+.usercard-icons {
+  background-color: white;
+
+  border: 0px;
+}
+
+.usercard-icons {
+  cursor: pointer;
+}
+
+.usercard-edit {
+  height: 30px;
+
+  width: 120px;
+
+  /* border-radius: 10px; */
+
+  background-color: #091644;
+
+  color: white;
+
+  font-family: "Roboto", sans-serif;
+}
+
+
+.user-page-main {
+  padding: 20px 50px;
+  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  background-color: #d1d4e3;
+  margin-left: 70px;
+}
