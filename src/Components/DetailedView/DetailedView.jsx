@@ -4,19 +4,31 @@ import CommentCard from "../CommentCard/CommentCard";
 import { useLayoutEffect } from "react";
 import { useContext } from "react";
 import DataContext from "../../Data/DataContext";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
 
 const DetailedView = () => {
-  const {authMiddleware} = useContext(DataContext);
+  const {id} = useParams();
+  const {authMiddleware, data, setData} = useContext(DataContext);
   
   useLayoutEffect(()=>{
     authMiddleware();
+    console.log(id);
+  },[])
 
+  useEffect(()=>{
+    axios.get(`https://localhost:7265/api/Idea/${id}`).then((response)=>{
+      setData(response.data);
+      console.log(response.data);
+      
+    })
   },[])
   return (
     <div className="detailed-idea-container">
       <div className="detailed-content">
         <div className="detailed-content-main">
-          <h2>Lorem ipsum dolor sit amet.</h2>
+          <h2>{data.title}</h2>
           <div className="detailed-all">
             <div>
               <h4>Owner</h4>
@@ -36,18 +48,18 @@ const DetailedView = () => {
             </div>
             <div>
               <h4>Created on</h4>
-              <p>07/16/2023</p>
+              <p>{data.ideaCreatedDate}</p>
             </div>
             <div className="detailed-summary">
               <h4>Summary</h4>
-              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem voluptates officia saepe eius impedit, sapiente harum nulla incidunt architecto, eaque consectetur Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur assumenda officiis itaque saepe fugit obcaecati et accusamus officia, dignissimos enim?</p>  
+              <p>{data.shortDescription}</p>  
             </div>
             
           </div>
         </div>
         <div className="long-description">
           <h2>Description</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum tenetur officiis facilis, voluptate ipsam perferendis accusantium voluptatum nostrum similique incidunt enim totam repellat quaerat velit dolorem sit eveniet in odit sequi architecto quae. Suscipit hic nihil aperiam quas tempore delectus quaerat. Molestiae necessitatibus modi nulla sequi delectus praesentium tenetur reprehenderit quo ipsam perspiciatis! Aperiam quia excepturi omnis ratione non rerum alias nulla. Voluptatem consectetur voluptas culpa? Esse hic architecto fuga excepturi eaque ipsam sapiente debitis eius provident facere ea eos voluptatibus quibusdam, molestias fugiat dolor animi assumenda minus quisquam facilis laborum odit exercitationem laudantium alias. Assumenda consequatur quo voluptatibus tempora.</p>
+          <p>{data.longDescription}</p>
 
         </div>
         <div className="detailed-idea-status">

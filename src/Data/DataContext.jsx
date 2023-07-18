@@ -21,8 +21,12 @@ export const DataProvider = ({children}) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const[toggle, setToggle] = useState(true);
-    const[summaryText, setSummaryText] = useState("");
-    const[discriptionText,setDescriptionText]=useState("");
+    const[title, setTitle] = useState("");
+    const[summary, setSummary] = useState("");
+    const[discription,setDescription]=useState("");
+    const [contributors,setContributors]=useState([])
+    const[data, setData] = useState({});
+    const [ideastatus,setideastatus]=useState("")
 
     function checkValues() {
         console.log("Values checking from context");
@@ -31,13 +35,13 @@ export const DataProvider = ({children}) => {
     }
     
     
-    useEffect(()=>{
-        axios.get("https://localhost:7265/api/User").then((response)=>{
-            //  console.log(response.data);
-            // setUserList(response.data);
-        })
-        console.log(auth);
-    },[])
+    // useEffect(()=>{
+    //     axios.get("https://localhost:7265/api/User").then((response)=>{
+    //         //  console.log(response.data);
+    //         // setUserList(response.data);
+    //     })
+    //     console.log(auth);
+    // },[])
 
     function authMiddleware() {
             console.log(auth);
@@ -61,26 +65,21 @@ export const DataProvider = ({children}) => {
             setAuth(response.data)
             if(response.data)
             {
-                console.log("in user");
                 navigate("/");
             } 
         }).catch((errors)=>{
             alert(errors.response.data)
-        })
-
-                  
-         
-
-        
+        })               
+                 
     }
 
     function asign1(data) {
         var array = [];
         data.map((item)=>{
             array.push(<IdeaCard 
-                TaskId={item.TaskId}
-                Title={item.Title}
-                Status={item.Status}
+                id={item.id}
+                title={item.title}
+                status={item.status}
                 />);
                 return 1;
         })
@@ -91,27 +90,30 @@ export const DataProvider = ({children}) => {
         var array = [];
         data.map((item)=>{
             array.push(<IdeaCard 
-                TaskId={item.TaskId}
-                Title={item.Title}
-                Status={item.Status}
+                id={item.TaskId}
+                title={item.Title}
+                status={item.Status}
                 />);
                 return 1;
         })
         setColumn2Items(array);        
     }
 
-    // useEffect(()=>{
-    //     axios.get("https://64af058ec85640541d4e0a7b.mockapi.io/tracker/tracker").then((response)=>{
-    //         console.log(response.data);
-    //         asign1(response.data);            
-    //     })
+    useEffect(()=>{
+        axios.get("https://localhost:7265/api/Idea/newidea").then((response)=>{
+            console.log(response.data);
+            asign1(response.data);            
+        }).catch(errors)
+        {
+            console.log(errors);
+        }
 
-    //     axios.get("https://64af058ec85640541d4e0a7b.mockapi.io/tracker/progress").then((response)=>{
-    //         console.log(response.data);
-    //         asign2(response.data);            
-    //     })
+        // axios.get("https://64af058ec85640541d4e0a7b.mockapi.io/tracker/progress").then((response)=>{
+        //     console.log(response.data);
+        //     asign2(response.data);            
+        // })
 
-    // },[])
+    },[])
     return (
         <DataContext.Provider value={{
             auth, setAuth,
@@ -128,8 +130,11 @@ export const DataProvider = ({children}) => {
             checkValues,authMiddleware,
             toggle, setToggle,
             authUser,
-            summaryText, setSummaryText,
-            discriptionText,setDescriptionText
+            title, setTitle,
+            summary, setSummary,
+            discription,setDescription,
+            contributors,setContributors,
+            data, setData
             
 
 

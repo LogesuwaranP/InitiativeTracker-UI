@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import "./CreateIdea.css"
 import TextBox from '../TextBox/TextBox';
-import CheckboxMultiSelect from '../CheckboxMultiSelect/CheckboxMultiSelect';
 import DataContext from '../../Data/DataContext';
 import { useContext } from 'react';
 import AnimatedMulti from '../CuzDrop/DropDown';
@@ -11,21 +10,22 @@ import axios from 'axios';
 const CreateIdea = ({setToggle}) => {
 
   const [selectedItems, setSelectedItems] = useState([]);
-  
-   
-
-
-
-  const[title, setTitle] = useState("");
-  const[summary, setSummary] = useState("");
-  const[discription,setDescription]=useState("");
-  const [contributors,setContributors]=useState([])
-  const [ideastatus,setideastatus]=useState("")
+  const {title, setTitle,summary, setSummary,discription,setDescription,contributors,setContributors} = useContext(DataContext);
+  // const [ideastatus,setideastatus]=useState("")
 
 
   function create() {
     // axios.post
     console.log(title,summary, discription,contributors);
+    axios.post("https://localhost:7265/api/Idea",{
+      title:title,
+      short_Description:summary,
+      long_Description:discription,
+      status:"New Idea",
+      idOfOwner:1
+    }).then((response)=>{
+      console.log(response.data);
+    })
     console.log(contributors);
     
   }

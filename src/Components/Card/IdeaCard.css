@@ -1,10 +1,11 @@
 .ideacard-container{
     margin: auto;
     padding: 10px;
-    max-width: 95%;
+    width: 18vw;
     background-color: rgb(255, 255, 255);
     text-align: left;
-    padding: 5px 10px 2px;
+
+    padding: 5px 10px 5px;
     display: grid;
     gap: 5px;
     margin-top: 10px;
@@ -30,4 +31,8 @@
     font-weight: 600;
     color: #ffffff;
     padding-top: 5px;
+}
+
+.ideacard-container p{
+    min-height: 40px;
 }
