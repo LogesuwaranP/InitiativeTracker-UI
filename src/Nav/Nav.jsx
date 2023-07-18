@@ -45,6 +45,8 @@ const Sidebar = () => {
               </li>
             </ul>
           </li>
+
+          <Link to='/profile'>
   
           <li>
             <a href="#">
@@ -61,6 +63,7 @@ const Sidebar = () => {
               </li>
             </ul>
           </li>
+          </Link>
           
   
           <li>

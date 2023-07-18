@@ -56,9 +56,9 @@ export const DataProvider = ({children}) => {
             email:email,
             password:password
         } ).then((response)=>{
-            console.log(response.data[0]);
-            setAuth(response.data[0])
-            if(response.data[0].role)
+            console.log(response.data);
+            setAuth(response.data)
+            if(response.data)
             {
                 console.log("in user");
                 navigate("/");

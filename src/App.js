@@ -12,6 +12,7 @@ import DetailedView from './Components/DetailedView/DetailedView';
 import EditProfile from './Components/EditProfile/EditProfile';
 import Authentication from './Components/Authentication/Authentication';
 import Sidebar from './Nav/Nav';
+import Profile from './Components/Profile/Profile';
 
 
 
@@ -37,6 +38,7 @@ function App() {
         <Route path='/login' element={<Authentication/>}/>
         <Route path='/idea-detailes' element={<DetailedView/>}/>
         <Route path='/profile-edit' element={<EditProfile/>}/>
+        <Route path='/profile' element={<Profile/>}/>
       </Routes>
       
       </DataProvider>
