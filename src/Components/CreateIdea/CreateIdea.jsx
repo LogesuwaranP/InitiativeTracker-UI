@@ -22,9 +22,15 @@ const CreateIdea = ({setToggle}) => {
       short_Description:summary,
       long_Description:discription,
       status:"New Idea",
-      idOfOwner:1
+      idOfOwner:1,
+      idOfContributors: []
     }).then((response)=>{
       console.log(response.data);
+      setToggle(false);
+    }).catch((response)=>{
+      alert("Line 30");
+      setToggle(false);
+
     })
     console.log(contributors);
     
