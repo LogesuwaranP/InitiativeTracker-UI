@@ -10,7 +10,7 @@ import axios from 'axios';
 const CreateIdea = ({setToggle}) => {
 
   const [selectedItems, setSelectedItems] = useState([]);
-  const {title, setTitle,summary, setSummary,discription,setDescription,contributors,setContributors} = useContext(DataContext);
+  const {title, setTitle,summary, setSummary,discription,setDescription,contributors,setContributors,auth} = useContext(DataContext);
   // const [ideastatus,setideastatus]=useState("")
 
 
@@ -22,7 +22,9 @@ const CreateIdea = ({setToggle}) => {
       short_Description:summary,
       long_Description:discription,
       status:"New Idea",
-      idOfOwner:1
+      idOfOwner:auth.id,
+      contributors:[]
+
     }).then((response)=>{
       console.log(response.data);
     })
