@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import "./DetailedView.css"
 import CommentCard from "../CommentCard/CommentCard";
 import { useLayoutEffect } from "react";
@@ -7,8 +7,26 @@ import DataContext from "../../Data/DataContext";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
+import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
+const DetailedView = () => {const ddData = [
+  { text: "A4", value: "size-a4" },
+];
 
-const DetailedView = () => {
+const [layoutSelection, setLayoutSelection] = useState({
+  text: "A4",
+  value: "size-a4"
+});
+
+const updatePageLayout = event => {
+  setLayoutSelection(event.target.value);
+};
+
+const pdfExportComponent = useRef(null);
+
+const handleExportWithComponent = event => {
+  pdfExportComponent.current.save();
+};
+
   const {id} = useParams();
   const {authMiddleware, data, setData} = useContext(DataContext);
   
@@ -25,10 +43,14 @@ const DetailedView = () => {
     })
   },[])
   return (
+    <>
+    <PDFExport ref={pdfExportComponent}>
+    <div className={`pdf-page ${layoutSelection.value}`}>
     <div className="detailed-idea-container">
       <div className="detailed-content">
         <div className="detailed-content-main">
           <h2>{data.title}</h2>
+          <div className='submit-idea'> <div className='SUBMIT' primary={true} onClick={handleExportWithComponent}>Download</div> </div>
           <div className="detailed-all">
             <div>
               <h4>Owner</h4>
@@ -89,11 +111,11 @@ const DetailedView = () => {
           </form>          
           <div><CommentCard/></div>
         </div>
-
       </div>
-      
-      
     </div>
+    </div>
+    </PDFExport>      
+    </>
   );
 };
 

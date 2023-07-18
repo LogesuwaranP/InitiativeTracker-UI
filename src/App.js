@@ -9,6 +9,11 @@ import DetailedView from './Components/DetailedView/DetailedView';
 import EditProfile from './Components/EditProfile/EditProfile';
 import Authentication from './Components/Authentication/Authentication';
 import Sidebar from './Nav/Nav';
+import Profile from './Components/Profile/Profile';
+
+
+
+
 
 function App() {
 
@@ -26,6 +31,7 @@ function App() {
         <Route path='/idea-detailes/:id' element={<DetailedView/>}/>
         <Route path="/profile-edit" element={<EditProfile/>}/>
         <Route path='/users' element={<UserPage/>}/>
+        <Route path='/profile' element={<Profile/>}/>
       </Routes>
       
       </DataProvider>

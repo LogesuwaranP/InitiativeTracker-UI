@@ -60,8 +60,8 @@ export const DataProvider = ({children}) => {
         {
             email:email,
             password:password
-        }).then((response)=>{
-            console.log(response);
+        } ).then((response)=>{
+            console.log(response.data);
             setAuth(response.data)
             if(response.data)
             {
