@@ -2,7 +2,6 @@ import React from 'react'
 import "./Authentication.css"
 import Login from '../Login/Login';
 import SignUp from '../SignUp/SignUp';
-import { useState } from 'react';
 import DataContext from '../../Data/DataContext';
 import { useContext } from 'react';
 

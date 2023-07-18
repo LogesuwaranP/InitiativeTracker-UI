@@ -1,12 +1,13 @@
 .ideacard-container{
     margin: auto;
     padding: 10px;
-    max-width: 95%;
+    width: 18vw;
     background-color: rgb(255, 255, 255);
     text-align: left;
-    padding: 5px;
+
+    padding: 5px 10px 5px;
     display: grid;
-    gap: 10px;
+    gap: 5px;
     margin-top: 10px;
     border-left: 5px solid rgb(0, 132, 255) ;
     border-radius: 5px ;
@@ -14,18 +15,24 @@
 
 .ideacard-icon{
     margin-top: 10px;
+    padding: 5px 10px 5px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    border-top: 1px solid #bab9ce;
 }
 
 .profile{
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     background-color: rgb(5, 19, 109);
     border-radius: 50%;
     text-align: center;
     font-weight: 600;
     color: #ffffff;
-    padding-top: 7px;
+    padding-top: 5px;
+}
+
+.ideacard-container p{
+    min-height: 40px;
 }

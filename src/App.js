@@ -1,10 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Login from './Components/Login/Login';
-import Admin from './Components/Admin/Admin';
-import UserPg from './Components/UserPage/User';
-import DataContext, { DataProvider } from './Data/DataContext';
+import  { DataProvider } from './Data/DataContext';
 import NewIdea from './Components/NewIdea/NewIdea';
 
 import DragAndDrop from './Components/DragAndDrop/DragAndDrop';
@@ -20,11 +17,6 @@ import Profile from './Components/Profile/Profile';
 
 function App() {
 
-  
-  
-  
- 
-
   return (
     <div className="App">    
       <DataProvider>
@@ -36,8 +28,8 @@ function App() {
         {/* <Route path='/user' element={<User/>} /> */}
         <Route path='/mail' element={<NewIdea/>}/>
         <Route path='/login' element={<Authentication/>}/>
-        <Route path='/idea-detailes' element={<DetailedView/>}/>
-        <Route path='/profile-edit' element={<EditProfile/>}/>
+        <Route path='/idea-detailes/:id' element={<DetailedView/>}/>
+        <Route path="/profile-edit" element={<EditProfile/>}/>
         <Route path='/profile' element={<Profile/>}/>
       </Routes>
       

@@ -27,8 +27,8 @@ const Login = () => {
 
 
     function finalCheck(e) {
-      //  handleBlur(e);
-      //  handleSubmit(e);
+       handleBlur(e);
+       handleSubmit(e);
        if(errors.email||errors.password )   
        {
 
