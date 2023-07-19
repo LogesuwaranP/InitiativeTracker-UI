@@ -31,18 +31,18 @@ function ViewCard() {
           <div className="userprofile-card">
             <>
               <div className="userprofile-date">
-                {idea.ideaCreatedDate}
+                {idea.createdTime}
                 <IconButton>
                   <InfoIcon sx={{ color: "#13266b" }} />
                 </IconButton>
               </div>
 
               <div className="userprofile-detail">
-                <b>{idea.user.userName}</b>
+                <b>{idea.name}</b>
                 <span className="userprofile-idea">
-                  {idea.shortDescription}
+                  {idea.shortdescription}
                 </span>
-                <p className="userprofile-content">{idea.longDescription}</p>
+                <p className="userprofile-content">{idea.longdescription}</p>
               </div>
               <div>
                 <div className="userprofile-icon"></div>

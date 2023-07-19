@@ -10,7 +10,8 @@ import EditProfile from './Components/EditProfile/EditProfile';
 import Authentication from './Components/Authentication/Authentication';
 import Sidebar from './Nav/Nav';
 import Profile from './Components/Profile/Profile';
-import Userprofile from './Components/Userprofile/Userprofile';
+import  Dashboard  from './Components/Dasboard/Dashboard';
+import MessageBox from './Components/MessageBox/MessageBox';import Userprofile from './Components/Userprofile/Userprofile';
 
 
 
@@ -31,7 +32,8 @@ function App() {
         <Route path="/profile-edit" element={<EditProfile/>}/>
         <Route path='/users' element={<UserPage/>}/>
         <Route path='/profile' element={<Profile/>}/>
-        <Route path='/userprofile' element={<Userprofile/>}/>
+        <Route path='/userprofile' element={<Userprofile/>}/><Route path='/Dashboard' element={<Dashboard/>}/>
+        <Route path='/MessageBox' element={<MessageBox text={"success"}/>}/>
       </Routes>
       
       </DataProvider>

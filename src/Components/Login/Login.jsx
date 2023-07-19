@@ -6,10 +6,17 @@ import DataContext from "../../Data/DataContext";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 const Login = () => {
-
   const navigate = useNavigate();
-  const { setEmail, setPassword, setToggle, checkValues, email, password, authUser } =
-    useContext(DataContext);
+  const {
+    setEmail,
+    setPassword,
+    setToggle,
+    checkValues,
+    email,
+    password,
+    authUser,
+  } = useContext(DataContext);
+
   const initialValues = {
     email: "",
     password: "",
@@ -25,21 +32,15 @@ const Login = () => {
       },
     });
 
-
-    function finalCheck(e) {
-       handleBlur(e);
-       handleSubmit(e);
-       if(errors.email||errors.password )   
-       {
-
-       }
-       else
-       {
-          console.log("hello");
-          authUser();
-       }
-       
+  function finalCheck(e) {
+    handleBlur(e);
+    handleSubmit(e);
+    if (errors.email || errors.password) {
+    } else {
+      console.log("hello");
+      authUser();
     }
+  }
 
   const [description, setDescription] = useState("");
   return (
@@ -75,7 +76,8 @@ const Login = () => {
           <label htmlFor="Name">Password</label>
           <input
             placeholder="Password"
-            type="password" name="password"
+            type="password"
+            name="password"
             id="password"
             value={values.password}
             onChange={(e) => {
@@ -83,12 +85,13 @@ const Login = () => {
               setPassword(e.target.value);
             }}
             onBlur={handleBlur}
-            style={errors.password && touched.password ? { borderColor: "red" } : {}}
-          />  {errors.password && touched.password ? (
-
+            style={
+              errors.password && touched.password ? { borderColor: "red" } : {}
+            }
+          />
+          {errors.password && touched.password ? (
             <p className="ERROR">{errors.password}</p>
-
-        ) : null}
+          ) : null}
         </form>
 
         <div className="SUBMIT login" onClick={finalCheck}>

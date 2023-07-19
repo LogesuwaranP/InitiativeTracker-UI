@@ -1,28 +1,30 @@
-import React, { useState,useContext,useLayoutEffect } from "react";
+import React, { useState, useContext, useLayoutEffect } from "react";
 import "./DragAndDrop.css";
 import IdeaCard from "../Card/IdeaCard";
-import DataContext from '../../Data/DataContext'
+import DataContext from "../../Data/DataContext";
 import CreateIdea from "../CreateIdea/CreateIdea";
-
+import MessageBox from "../MessageBox/MessageBox";
 
 const DragAndDrop = () => {
-
-  const {authMiddleware} = useContext(DataContext);
-  useLayoutEffect(()=>{
+  const { authMiddleware } = useContext(DataContext);
+  useLayoutEffect(() => {
     authMiddleware();
+  }, []);
 
-  },[])
-  
-
-  const[toggle, setToggle] =  useState(false)
+  const [toggle, setToggle] = useState(false);
   const [draggingItem, setDraggingItem] = useState(null);
   const {
-    column1Items, setColumn1Items,
-    column2Items, setColumn2Items,
-    column3Items, setColumn3Items,
-    column4Items, setColumn4Items,
-    column5Items, setColumn5Items } = useContext(DataContext);
-  
+    column1Items,
+    setColumn1Items,
+    column2Items,
+    setColumn2Items,
+    column3Items,
+    setColumn3Items,
+    column4Items,
+    setColumn4Items,
+    column5Items,
+    setColumn5Items,
+  } = useContext(DataContext);
 
   const handleDragStart = (e, item, column) => {
     console.log(item, column);
@@ -40,7 +42,7 @@ const DragAndDrop = () => {
   const handleDrop = (e, targetColumn) => {
     e.preventDefault();
 
-    if(draggingItem.column===targetColumn)return
+    if (draggingItem.column === targetColumn) return;
 
     console.log(draggingItem);
 
@@ -111,115 +113,126 @@ const DragAndDrop = () => {
 
   return (
     <div className="scrolling-wrapper-flexbox">
-      {toggle?<CreateIdea setToggle={setToggle}/>:<div className="btn-create" onClick={()=>{setToggle(true)}}>+</div>}
-    
-    <div className="container">
-      <div className="main-column">
-        <h2>New Idea</h2>
-        <div className="column"
-          
-          onDragOver={handleDragOver}
-          onDrop={(e) => handleDrop(e, "column1")}
-        >
-          {column1Items.map((item, index) => (
-            <div
-              key={index}
-              className="item"
-              draggable
-              onDragStart={(e) => handleDragStart(e, item, "column1")}
-              onDragEnd={handleDragEnd}
-            >
-              {item}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="main-column">
-        <h2>To Do</h2>
+      <MessageBox />
+      {toggle ? (
+        <CreateIdea setToggle={setToggle} />
+      ) : (
         <div
-          className="column"
-          onDragOver={handleDragOver}
-          onDrop={(e) => handleDrop(e, "column2")}
-        >       
-          {column2Items.map((item, index) => (
-            <div
-              key={index}
-              className="item"
-              draggable
-              onDragStart={(e) => handleDragStart(e, item, "column2")}
-              onDragEnd={handleDragEnd}
-            >
-              {item}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="main-column">
-        <h2>In Progress</h2>
-        <div
-          className="column"
-          onDragOver={handleDragOver}
-          onDrop={(e) => handleDrop(e, "column3")}
+          className="btn-create"
+          onClick={() => {
+            setToggle(true);
+          }}
         >
-          {column3Items.map((item, index) => (
-            <div
-              key={index}
-              className="item"
-              draggable
-              onDragStart={(e) => handleDragStart(e, item, "column3")}
-              onDragEnd={handleDragEnd}
-            >
-              <IdeaCard/>
-            </div>
-          ))}
+          +
         </div>
-      </div>
+      )}
 
-      <div className="main-column">
-        <h2>In Review</h2>
-        <div
-          className="column"
-          onDragOver={handleDragOver}
-          onDrop={(e) => handleDrop(e, "column4")}
-        >
-          {column4Items.map((item, index) => (
-            <div
-              key={index}
-              className="item"
-              draggable
-              onDragStart={(e) => handleDragStart(e, item, "column4")}
-              onDragEnd={handleDragEnd}
-            >
-              {item}
-            </div>
-          ))}
+      <div className="container">
+        <div className="main-column">
+          <h2>New Idea</h2>
+          <div
+            className="column"
+            onDragOver={handleDragOver}
+            onDrop={(e) => handleDrop(e, "column1")}
+          >
+            {column1Items.map((item, index) => (
+              <div
+                key={index}
+                className="item"
+                draggable
+                onDragStart={(e) => handleDragStart(e, item, "column1")}
+                onDragEnd={handleDragEnd}
+              >
+                {item}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className="main-column">
-        <h2>Done</h2>
-        <div
-          className="column"
-          onDragOver={handleDragOver}
-          onDrop={(e) => handleDrop(e, "column5")}
-        >
-          {column5Items.map((item, index) => (
-            <div
-              key={index}
-              className="item"
-              draggable
-              onDragStart={(e) => handleDragStart(e, item, "column5")}
-              onDragEnd={handleDragEnd}
-            >
-              {item}
-            </div>
-          ))}
+        <div className="main-column">
+          <h2>To Do</h2>
+          <div
+            className="column"
+            onDragOver={handleDragOver}
+            onDrop={(e) => handleDrop(e, "column2")}
+          >
+            {column2Items.map((item, index) => (
+              <div
+                key={index}
+                className="item"
+                draggable
+                onDragStart={(e) => handleDragStart(e, item, "column2")}
+                onDragEnd={handleDragEnd}
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="main-column">
+          <h2>In Progress</h2>
+          <div
+            className="column"
+            onDragOver={handleDragOver}
+            onDrop={(e) => handleDrop(e, "column3")}
+          >
+            {column3Items.map((item, index) => (
+              <div
+                key={index}
+                className="item"
+                draggable
+                onDragStart={(e) => handleDragStart(e, item, "column3")}
+                onDragEnd={handleDragEnd}
+              >
+                <IdeaCard />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="main-column">
+          <h2>In Review</h2>
+          <div
+            className="column"
+            onDragOver={handleDragOver}
+            onDrop={(e) => handleDrop(e, "column4")}
+          >
+            {column4Items.map((item, index) => (
+              <div
+                key={index}
+                className="item"
+                draggable
+                onDragStart={(e) => handleDragStart(e, item, "column4")}
+                onDragEnd={handleDragEnd}
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="main-column">
+          <h2>Done</h2>
+          <div
+            className="column"
+            onDragOver={handleDragOver}
+            onDrop={(e) => handleDrop(e, "column5")}
+          >
+            {column5Items.map((item, index) => (
+              <div
+                key={index}
+                className="item"
+                draggable
+                onDragStart={(e) => handleDragStart(e, item, "column5")}
+                onDragEnd={handleDragEnd}
+              >
+                {item}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-    
     </div>
   );
 };
