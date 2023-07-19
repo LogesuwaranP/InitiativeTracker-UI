@@ -1,10 +1,10 @@
 import React, { useState,useContext,useLayoutEffect, useEffect } from "react";
 import "./DragAndDrop.css";
 import IdeaCard from "../Card/IdeaCard";
-import DataContext from '../../Data/DataContext'
+import DataContext from "../../Data/DataContext";
 import CreateIdea from "../CreateIdea/CreateIdea";
 import axios from "axios";
-
+import MessageBox from "../MessageBox/MessageBox";
 
 const DragAndDrop = () => {
 
@@ -106,7 +106,7 @@ const DragAndDrop = () => {
   const handleDrop = (e, targetColumn) => {
     e.preventDefault();
 
-    if(draggingItem.column===targetColumn)return
+    if (draggingItem.column === targetColumn) return;
 
     console.log();
 

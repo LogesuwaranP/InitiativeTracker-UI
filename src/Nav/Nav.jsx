@@ -6,9 +6,8 @@ import { useContext } from "react";
 import DataContext from "../Data/DataContext";
 
 const Sidebar = () => {
+  const { auth } = useContext(DataContext);
 
-  const{auth} = useContext(DataContext);
-  
   const [showMenu, setShowMenu] = useState(false);
 
   const [sidebarClosed, setSidebarClosed] = useState(true);
@@ -147,8 +146,6 @@ const Sidebar = () => {
       }
 
     </>
-    
-    
   );
 };
 

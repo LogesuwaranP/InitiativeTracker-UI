@@ -1,10 +1,16 @@
-import axios from 'axios';
-import React, {useState, createContext, useEffect, useLayoutEffect  } from 'react';
-import IdeaCard from '../Components/Card/IdeaCard';
-import { useNavigate } from 'react-router-dom';
-import errors from 'validators/lib/errors';
+import axios from "axios";
+import React, {
+  useState,
+  createContext,
+  useEffect,
+  useLayoutEffect,
+} from "react";
+import IdeaCard from "../Components/Card/IdeaCard";
+import { useNavigate } from "react-router-dom";
+import errors from "validators/lib/errors";
+import MessageBox from "../Components/MessageBox/MessageBox";
 
-const DataContext =   createContext({});
+const DataContext = createContext({});
 
 export const DataProvider = ({children}) => {
     const navigate = useNavigate();
@@ -44,10 +50,14 @@ export const DataProvider = ({children}) => {
     // },[])
 
     function authMiddleware() {
+            console.log(auth);
             if(!auth)
             {
               navigate("/login")
-            }            
+            }
+            else{
+                console.log(auth);
+            }               
     }
 
     function authUser() {
@@ -57,6 +67,7 @@ export const DataProvider = ({children}) => {
             email:email,
             password:password
         } ).then((response)=>{
+            console.log(response.data);
             setAuth(response.data)
             if(response.data)
             {
@@ -68,26 +79,24 @@ export const DataProvider = ({children}) => {
                  
     }
 
-    function asign1(data) {
-        var array = [];
-        data.map((item)=>{
-            array.push(<IdeaCard 
-                id={item.id}
-                title={item.title}
-                status={item.status}
-                />);
-                return 1;
-        })
-        setColumn1Items(array);        
-    }
+  function asign1(data) {
+    var array = [];
+    data.map((item) => {
+      array.push(
+        <IdeaCard id={item.id} title={item.title} status={item.status} />
+      );
+      return 1;
+    });
+    setColumn1Items(array);
+  }
 
     function asign2(data) {
         var array = [];
         data.map((item)=>{
             array.push(<IdeaCard 
-                id={item.id}
-                title={item.title}
-                status={item.status}
+                id={item.TaskId}
+                title={item.Title}
+                status={item.Status}
                 />);
                 return 1;
         })
