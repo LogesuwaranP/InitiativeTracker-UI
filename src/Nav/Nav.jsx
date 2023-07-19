@@ -22,118 +22,129 @@ const Sidebar = () => {
 
   return (
     <>
-      {auth ? (
-        <div className={`sidebar ${sidebarClosed ? "close" : ""}`}>
-          <div className="logo-details">
-            <i className="bx bx-menu" onClick={handleSidebarClick}></i>
-          </div>
+      {
+        auth?<div className={`sidebar ${sidebarClosed ? "close" : ""}`}>
+        <div className="logo-details">
+          <i className="bx bx-menu" onClick={handleSidebarClick}></i>
+        </div>
 
-          <ul className="nav-links">
+        
+  
+        <ul className="nav-links">
+          <Link to="/">
+              <li>
+                <a>
+                  <i className="bx bx-grid-alt"></i>
+      
+                  <span className="link_name">Dashboard</span>
+                </a>
+      
+                <ul className={`sub-menu ${showMenu ? "" : "blank"}`}>
+                  <li>
+                    <a className="link_name">
+                      Category
+                    </a>
+                  </li>
+                </ul>
+              </li>
+          </Link>
+          
+
+          <Link to='/profile'> 
             <li>
-              <a href="#">
-                <i className="bx bx-grid-alt"></i>
-
-                <span className="link_name">Dashboard</span>
+              <a>
+                <i className="bx bx-line-chart"></i>
+    
+                <span className="link_name">Chart</span>
               </a>
-
+    
               <ul className={`sub-menu ${showMenu ? "" : "blank"}`}>
                 <li>
-                  <a className="link_name" href="#">
-                    Category
+                  <a className="link_name">
+                    Chart
                   </a>
                 </li>
               </ul>
             </li>
-
-            <Link to="/profile">
+          </Link>
+          
+          {
+            auth.role="Approver"?
+            <Link>
               <li>
-                <a href="#">
-                  <i className="bx bx-line-chart"></i>
-
-                  <span className="link_name">Chart</span>
-                </a>
-
-                <ul className={`sub-menu ${showMenu ? "" : "blank"}`}>
-                  <li>
-                    <a className="link_name" href="#">
-                      Chart
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </Link>
-
-            <Link to="/Dashboard">
-              <li>
-                <a href="#">
+                <a>
                   <i className="bx bx-compass"></i>
-                  <span className="link_name">Explore</span>
+                  <span className="link_name">Pending</span>
                 </a>
-
+      
                 <ul className={`sub-menu ${showMenu ? "" : "blank"}`}>
                   <li>
-                    <a className="link_name" href="#">
-                      Explore
+                    <a className="link_name">
+                      Pending
                     </a>
                   </li>
                 </ul>
               </li>
-            </Link>
+            </Link>:<></>
+           }
 
-            <Link to="/users">
-              <li>
-                <a href="#">
-                  <i className="bx bx-history"></i>
-
-                  <span className="link_name">History</span>
-                </a>
-
-                <ul className={`sub-menu ${showMenu ? "" : "blank"}`}>
-                  <li>
-                    <a className="link_name" href="#">
-                      History
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </Link>
-<Link to="/MessageBox">
+          {
+            auth.role=="Admin"?
+            <Link to="/users">  
             <li>
-              <a href="#">
-                <i className="bx bx-cog"></i>
-
-                <span className="link_name">Setting</span>
+              <a>
+                <i className="bx bx-history"></i>
+    
+                <span className="link_name">History</span>
               </a>
-
+    
               <ul className={`sub-menu ${showMenu ? "" : "blank"}`}>
                 <li>
-                  <a className="link_name" href="#">
+                  <a className="link_name">
+                    History
+                  </a>
+                </li>
+              </ul>
+            </li>
+            </Link>:<></>
+          }
+
+
+          <Link to="/profile-edit">
+            <li>
+              <a>
+                <i className="bx bx-cog"></i>
+                  <span className="link_name"> Edit Profile</span>
+                </a>
+              <ul className={`sub-menu ${showMenu ? "" : "blank"}`}>
+                <li>
+                  <a className="link_name">
                     Setting
                   </a>
                 </li>
               </ul>
             </li>
-            </Link>
-
-            <Link to="/profile-edit">
-              <li>
-                <div className="profile-details">
-                  <div className="profile-content">
-                    <img src="image/profile.jpg" alt="profileImg" />
-                  </div>
-                  <div className="name-job">
-                    <div className="profile_name">Treaker</div>
-                    <div className="job">Team</div>
-                  </div>
-                  <i className="bx bx-log-out"></i>
+          </Link>
+  
+          <Link to='/profile-edit' >        
+            <li>
+              <div className="profile-details">
+                <div className="profile-content">
+                  <img src="image/profile.jpg" alt="profileImg" />
                 </div>
-              </li>
-            </Link>
-          </ul>
-        </div>
-      ) : (
-        <></>
-      )}
+                <div className="name-job">
+                  <div className="profile_name">Treaker</div>
+                  <div className="job">Team</div>
+                </div>
+                <i className="bx bx-log-out"></i>
+              </div>
+            </li>
+          </Link>
+  
+        </ul>
+      </div>:<></>
+      }
+
     </>
   );
 };

@@ -23,25 +23,18 @@ const CreateIdea = ({ setToggle }) => {
 
   function create() {
     // axios.post
-    console.log(title, summary, discription, contributors);
-    axios
-      .post("https://localhost:7265/api/Idea", {
-        title: title,
-        short_Description: summary,
-        long_Description: discription,
-        status: "New Idea",
-        idOfOwner: auth.id,
-        contributors: [],
-      })
-      .then((response) => {
-        console.log(response.data);
-        setToggle(false);
-      })
-      .catch((error) => {
-        console.log(error.response);
-        alert(error);
-        setToggle(false);
-      });
+    console.log(title,summary, discription,contributors);
+    axios.post("https://localhost:7265/api/Idea",{
+      title:"title",
+      short_Description:"summary",
+      long_Description:"discription",
+      status:"New Idea",
+      idOfOwner:auth.id,
+      idOfContributors:[1]
+
+    }).then((response)=>{
+      console.log(response.data);
+    })
     console.log(contributors);
   }
 

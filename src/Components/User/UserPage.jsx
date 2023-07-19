@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import UserCard from './UserCard'
+import Userprofile from '../Userprofile/Userprofile'
 
 function UserPage() {
 
@@ -11,12 +12,14 @@ function UserPage() {
 
   return (
     <div className='user-page-main'>
-      {/* <UserCard/>
       <UserCard/>
       <UserCard/>
       <UserCard/>
       <UserCard/>
-      <UserCard/> */}
+      <UserCard/>
+      <UserCard/>
+      <UserCard/>
+      <UserCard/>
     </div>
   )
 }
