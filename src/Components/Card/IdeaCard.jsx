@@ -11,7 +11,8 @@ import IconButton from '@mui/material/IconButton';
 const IdeaCard = ({id,title,status}) => {
 
   const navigate = useNavigate();
-  console.log(id);
+  console.log(title, id, status);
+
 
   return (
     <div className='ideacard-container'>

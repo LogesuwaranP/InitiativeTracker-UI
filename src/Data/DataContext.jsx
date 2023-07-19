@@ -13,9 +13,9 @@ export const DataProvider = ({children}) => {
     const [userList, setUserList] = useState([]);
     const [column1Items, setColumn1Items] = useState([]);
     const [column2Items, setColumn2Items] = useState([]);
-    const [column3Items, setColumn3Items] = useState([<IdeaCard/>, <IdeaCard/>]);
+    const [column3Items, setColumn3Items] = useState([]);
     const [column4Items, setColumn4Items] = useState([]);
-    const [column5Items, setColumn5Items] = useState([<IdeaCard/>, <IdeaCard/>]);
+    const [column5Items, setColumn5Items] = useState([]);
     const [userName , setUserName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -29,9 +29,9 @@ export const DataProvider = ({children}) => {
     const [ideastatus,setideastatus]=useState("")
 
     function checkValues() {
-        console.log("Values checking from context");
-        navigate("/drag")
-        console.log("user signup==="+"email:"+email+"-userName:"+userName+"-password"+password+"-confirmPassword"+confirmPassword)
+        // console.log("Values checking from context");
+        // console.log("user signup==="+"email:"+email+"-userName:"+userName+"-password"+password+"-confirmPassword"+confirmPassword)
+        console.log(column1Items);
     }
     
     
@@ -44,14 +44,10 @@ export const DataProvider = ({children}) => {
     // },[])
 
     function authMiddleware() {
-            console.log(auth);
             if(!auth)
             {
               navigate("/login")
-            }
-            else{
-                console.log(auth);
-            }               
+            }            
     }
 
     function authUser() {
@@ -61,7 +57,6 @@ export const DataProvider = ({children}) => {
             email:email,
             password:password
         } ).then((response)=>{
-            console.log(response.data);
             setAuth(response.data)
             if(response.data)
             {
@@ -90,9 +85,9 @@ export const DataProvider = ({children}) => {
         var array = [];
         data.map((item)=>{
             array.push(<IdeaCard 
-                id={item.TaskId}
-                title={item.Title}
-                status={item.Status}
+                id={item.id}
+                title={item.title}
+                status={item.status}
                 />);
                 return 1;
         })
@@ -101,17 +96,15 @@ export const DataProvider = ({children}) => {
 
     useEffect(()=>{
         axios.get("https://localhost:7265/api/Idea/newidea").then((response)=>{
-            console.log(response.data);
             asign1(response.data);            
-        }).catch(errors)
-        {
+        }).catch((errors)=>{
             console.log(errors);
-        }
+        });
 
-        // axios.get("https://64af058ec85640541d4e0a7b.mockapi.io/tracker/progress").then((response)=>{
-        //     console.log(response.data);
-        //     asign2(response.data);            
-        // })
+        axios.get("https://localhost:7265/api/Idea/todo").then((response)=>{
+            console.log(response.data);
+            asign2(response.data);            
+        })
 
     },[])
     return (
@@ -134,8 +127,7 @@ export const DataProvider = ({children}) => {
             summary, setSummary,
             discription,setDescription,
             contributors,setContributors,
-            data, setData
-            
+            data, setData          
 
 
         }}>{children}</DataContext.Provider>

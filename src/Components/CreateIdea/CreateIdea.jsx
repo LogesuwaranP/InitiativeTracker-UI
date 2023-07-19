@@ -18,12 +18,12 @@ const CreateIdea = ({setToggle}) => {
     // axios.post
     console.log(title,summary, discription,contributors);
     axios.post("https://localhost:7265/api/Idea",{
-      title:title,
-      short_Description:summary,
-      long_Description:discription,
+      title:"title",
+      short_Description:"summary",
+      long_Description:"discription",
       status:"New Idea",
       idOfOwner:auth.id,
-      contributors:[]
+      idOfContributors:[1]
 
     }).then((response)=>{
       console.log(response.data);
