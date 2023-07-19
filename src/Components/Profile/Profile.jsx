@@ -29,7 +29,7 @@ const Profile = () => {
         ></img>
 
         <h4 className="ProfileUser">{ideas.userName}</h4>
-        <h6 className="role">{ideas.role.type}</h6>
+        <h6 className="role">{ideas.role?.type}</h6>
         <p className="Bio">{ideas.bio}</p>
         <div className="icon">
           <a href={ideas.linkedin}>
