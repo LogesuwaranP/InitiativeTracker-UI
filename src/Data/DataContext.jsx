@@ -12,8 +12,8 @@ import MessageBox from "../Components/MessageBox/MessageBox";
 
 const DataContext = createContext({});
 
-export const DataProvider = ({children}) => {
-    const navigate = useNavigate();
+export const DataProvider = ({ children }) => {
+  const navigate = useNavigate();
 
     const [auth, setAuth] = useState('');
     const [list, setList] = useState([]);
@@ -56,30 +56,34 @@ export const DataProvider = ({children}) => {
       }            
     }
 
-    function authUser() {
-
-        axios.post("https://localhost:7265/auth",
-        {
-            email:email,
-            password:password
-        } ).then((response)=>{
-            console.log(response.data);
-            setAuth(response.data)
-            if(response.data)
-            {
-                navigate("/");
-            } 
-        }).catch((errors)=>{
-            alert(errors.response.data)
-        })               
-                 
-    }
+  function authUser() {
+    axios
+      .post("https://localhost:7265/auth", {
+        email: email,
+        password: password,
+      })
+      .then((response) => {
+        console.log(response.data);
+        setAuth(response.data);
+        if (response.data) {
+          navigate("/");
+        }
+      })
+      .catch((errors) => {
+        alert(errors.response.data);
+      });
+  }
 
   function asign1(data) {
     var array = [];
     data.map((item) => {
       array.push(
-        <IdeaCard id={item.id} title={item.title} status={item.status} />
+        <IdeaCard
+          id={item.id}
+          title={item.title}
+          status={item.status}
+          like={item.like}
+        />
       );
       return 1;
     });
@@ -97,12 +101,15 @@ export const DataProvider = ({children}) => {
     setColumn2Items(array);
   }
 
-    useEffect(()=>{
-        axios.get("https://localhost:7265/api/Idea/newidea").then((response)=>{
-            asign1(response.data);            
-        }).catch((errors)=>{
-            console.log(errors);
-        });
+  useEffect(() => {
+    axios
+      .get("https://localhost:7265/api/Idea/newidea")
+      .then((response) => {
+        asign1(response.data);
+      })
+      .catch((errors) => {
+        console.log(errors);
+      });
 
         axios.get("https://localhost:7265/api/Idea/todo").then((response)=>{
             console.log(response.data);

@@ -37,6 +37,7 @@ function App() {
         <Route path='/userprofile' element={<Userprofile/>}/>
         <Route path='/Dashboard' element={<Dashboard/>}/>
         <Route path='/MessageBox' element={<MessageBox text={"success"}/>}/>
+        <Route path='/dashboard' element={<Dashboard/>}/>
       </Routes>
       
       </DataProvider>

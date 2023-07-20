@@ -1,4 +1,4 @@
-import React, { useState,useContext,useLayoutEffect, useEffect } from "react";
+import React, { useState, useContext, useLayoutEffect, useEffect } from "react";
 import "./DragAndDrop.css";
 import IdeaCard from "../Card/IdeaCard";
 import DataContext from "../../Data/DataContext";
@@ -7,10 +7,9 @@ import axios from "axios";
 import MessageBox from "../MessageBox/MessageBox";
 
 const DragAndDrop = () => {
-
-  const {authMiddleware,auth,checkValues} = useContext(DataContext);
+  const { authMiddleware, auth, checkValues } = useContext(DataContext);
   console.log(auth);
-  useLayoutEffect(()=>{
+  useLayoutEffect(() => {
     authMiddleware();
 
   },[])
@@ -19,75 +18,84 @@ const DragAndDrop = () => {
   const[toggle, setToggle] =  useState(false)
   const [draggingItem, setDraggingItem] = useState(null);
   const {
-    column1Items, setColumn1Items,
-    column2Items, setColumn2Items,
-    column3Items, setColumn3Items,
-    column4Items, setColumn4Items,
-    column5Items, setColumn5Items } = useContext(DataContext);
+    column1Items,
+    setColumn1Items,
+    column2Items,
+    setColumn2Items,
+    column3Items,
+    setColumn3Items,
+    column4Items,
+    setColumn4Items,
+    column5Items,
+    setColumn5Items,
+  } = useContext(DataContext);
 
-
-
-    function asign1(data) {
-      var array = [];
-      data.map((item)=>{
-        array.push(<IdeaCard 
-            id={item.id}
-            title={item.title}
-            status={item.status}
-            />);
-            return 1;
-    })
+  function asign1(data) {
+    var array = [];
+    data.map((item) => {
+      array.push(
+        <IdeaCard
+          id={item.id}
+          title={item.title}
+          status={item.status}
+          like={item.like}
+        />
+      );
+      return 1;
+    });
     console.log(data, "IN Review");
-      setColumn3Items(array);        
+    setColumn3Items(array);
   }
 
-
-
   function asign2(data) {
-      var array = [];
-      data.map((item)=>{
-          array.push(<IdeaCard 
-              id={item.id}
-              title={item.title}
-              status={item.status}
-              />);
-              return 1;
-      })
-      console.log(data, "IN review");
-      setColumn4Items(array);        
+    var array = [];
+    data.map((item) => {
+      array.push(
+        <IdeaCard
+          id={item.id}
+          title={item.title}
+          status={item.status}
+          like={item.like}
+        />
+      );
+      return 1;
+    });
+    console.log(data, "IN review");
+    setColumn4Items(array);
   }
 
   function asign3(data) {
     var array = [];
-    data.map((item)=>{
-        array.push(<IdeaCard 
-            id={item.id}
-            title={item.title}
-            status={item.status}
-            />);
-            return 1;
-    })
+    data.map((item) => {
+      array.push(
+        <IdeaCard
+          id={item.id}
+          title={item.title}
+          status={item.status}
+          like={item.like}
+        />
+      );
+      return 1;
+    });
     console.log(data, "IN review");
-    setColumn5Items(array);        
-}
-    
-    useEffect(()=>{
-      axios.get("https://localhost:7265/api/Idea/inprogess").then((response)=>{
-            asign1(response.data);            
-        })
+    setColumn5Items(array);
+  }
 
-      axios.get("https://localhost:7265/api/Idea/inreview").then((response)=>{
-          console.log(response.data);
-          asign2(response.data);            
-      })
+  useEffect(() => {
+    axios.get("https://localhost:7265/api/Idea/inprogess").then((response) => {
+      asign1(response.data);
+    });
 
-      axios.get("https://localhost:7265/api/Idea/done").then((response)=>{
-          console.log(response.data);
-          asign3(response.data);            
-      })
+    axios.get("https://localhost:7265/api/Idea/inreview").then((response) => {
+      console.log(response.data);
+      asign2(response.data);
+    });
 
-  },[])
-  
+    axios.get("https://localhost:7265/api/Idea/done").then((response) => {
+      console.log(response.data);
+      asign3(response.data);
+    });
+  }, []);
 
   const handleDragStart = (e, item, column) => {
     console.log(item, column);
@@ -111,28 +119,30 @@ const DragAndDrop = () => {
 
     if (draggingItem) {
       switch (targetColumn) {
-        case "New Idea":
-          {
-            axios.put('https://localhost:7265/api/Idea/update/id', {
-              id:draggingItem.item.props.id,
-              status:"New Idea"
+        case "New Idea": {
+          axios
+            .put("https://localhost:7265/api/Idea/update/id", {
+              id: draggingItem.item.props.id,
+              status: "New Idea",
             })
-              .then(response => setColumn1Items([...column1Items, draggingItem.item]));
-            
-            break;
-          }
-          
-          
+            .then((response) =>
+              setColumn1Items([...column1Items, draggingItem.item])
+            );
 
-        case "To Do":
-          {
-            axios.put('https://localhost:7265/api/Idea/update/id', {
-              id:draggingItem.item.props.id,
-              status:"To Do"
+          break;
+        }
+
+        case "To Do": {
+          axios
+            .put("https://localhost:7265/api/Idea/update/id", {
+              id: draggingItem.item.props.id,
+              status: "To Do",
             })
-              .then(response =>  setColumn2Items([...column2Items, draggingItem.item]));
-            break;
-          }
+            .then((response) =>
+              setColumn2Items([...column2Items, draggingItem.item])
+            );
+          break;
+        }
 
         case "In Progress":
           {
@@ -153,20 +163,20 @@ const DragAndDrop = () => {
               id:draggingItem.item.props.id,
               status:"In Review"
             })
-              .then(response =>  console.log(response));
-            break;
-          }
+            .then((response) => console.log(response));
+          break;
+        }
 
-        case "Done":
-          {
-            setColumn5Items([...column5Items, draggingItem.item]);
-            axios.put('https://localhost:7265/api/Idea/update/id', {
-              id:draggingItem.item.props.id,
-              status:"Done"
+        case "Done": {
+          setColumn5Items([...column5Items, draggingItem.item]);
+          axios
+            .put("https://localhost:7265/api/Idea/update/id", {
+              id: draggingItem.item.props.id,
+              status: "Done",
             })
-              .then(response =>  console.log(response));
-            break;
-          }
+            .then((response) => console.log(response));
+          break;
+        }
 
         default:
           break;
@@ -304,27 +314,27 @@ const DragAndDrop = () => {
         </div>
       </div>
 
-      <div className="main-column"
-        onDragOver={handleDragOver}
-        onDrop={(e) => handleDrop(e, "Done")}
-      >
-        <h2>Done</h2>
-        <div className="column">
-          {column5Items.map((item, index) => (
-            <div
-              key={index}
-              className="item"
-              // draggable
-              onDragStart={(e) => handleDragStart(e, item, "Done")}
-              onDragEnd={handleDragEnd}
-            >
-              {item}
-            </div>
-          ))}
+        <div
+          className="main-column"
+          onDragOver={handleDragOver}
+          onDrop={(e) => handleDrop(e, "Done")}
+        >
+          <h2>Done</h2>
+          <div className="column">
+            {column5Items.map((item, index) => (
+              <div
+                key={index}
+                className="item"
+                // draggable
+                onDragStart={(e) => handleDragStart(e, item, "Done")}
+                onDragEnd={handleDragEnd}
+              >
+                {item}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-    
     </div>
   );
 };
