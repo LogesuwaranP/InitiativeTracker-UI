@@ -6,7 +6,13 @@
   height: 100vh; 
   margin-left: 100px ; 
 }
-
+.submit-idea-details{
+  width: 150px;
+    padding: 10px;
+    text-align: center;
+    margin-right: 35px;
+    float: right;
+}
 .detailed-content h2{
   margin: 10px 0;
   font-size: 18px;

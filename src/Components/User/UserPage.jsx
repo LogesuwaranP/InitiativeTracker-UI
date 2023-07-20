@@ -23,10 +23,8 @@ function UserPage() {
       <UserCard/>
       <UserCard/>
       <UserCard/>
-      {/* <Userprofile/>
-      <Userprofile/>
-      <Userprofile/><Userprofile/><Userprofile/><Userprofile/> */}
-
+      <UserCard/>
+      <UserCard/>
     </div>
     </>
   )

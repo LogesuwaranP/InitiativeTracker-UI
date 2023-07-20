@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
+import { ExportToExcel } from "../../schemas/ExportToExcel";
+import Tooltip from '@mui/material/Tooltip';
 const DetailedView = () => {const ddData = [
   { text: "A4", value: "size-a4" },
 ];
@@ -42,6 +44,15 @@ const handleExportWithComponent = event => {
       
     })
   },[])
+  const [data1, setData1] = React.useState([])
+  const fileName = "mysamplefile"; // here enter filename for your excel file
+
+  React.useEffect(() => {
+    const fetchData = () =>{
+     axios.get('https://localhost:7265/api/Idea/excel').then(r => setData1(r.data) )
+    }
+    fetchData()
+  }, [])
   return (
     <>
     <PDFExport ref={pdfExportComponent}>
@@ -50,7 +61,7 @@ const handleExportWithComponent = event => {
       <div className="detailed-content">
         <div className="detailed-content-main">
           <h2>{data.title}</h2>
-          <div className='submit-idea'> <div className='SUBMIT' primary={true} onClick={handleExportWithComponent}>Download</div> </div>
+          <div className='submit-idea-details'> <ExportToExcel apiData={data1} fileName={fileName} /><Tooltip title="Download"><i class='bi bi-cloud-arrow-down' primary={true} onClick={handleExportWithComponent} style={{fontSize:"24px"}}/> </Tooltip></div>
           <div className="detailed-all">
             <div>
               <h4>Owner</h4>

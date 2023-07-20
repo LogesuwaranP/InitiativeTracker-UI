@@ -11,7 +11,7 @@ const Profile = () => {
     authMiddleware();
   }, []);
 
-  const [ideas, setIdeas] = useState([]);
+  const [ideas, setIdeas] = useState({});
   useEffect(() => {
     axios.get(`https://localhost:7265/api/User/${auth.id}`).then((response) => {
       console.log(response.data);
@@ -29,7 +29,7 @@ const Profile = () => {
         ></img>
 
         <h4 className="ProfileUser">{ideas.userName}</h4>
-        <h6 className="role">{ideas.role}</h6>
+        <h6 className="role">{ideas.role?.type}</h6>
         <p className="Bio">{ideas.bio}</p>
         <div className="icon">
           <a href={ideas.linkedin}>

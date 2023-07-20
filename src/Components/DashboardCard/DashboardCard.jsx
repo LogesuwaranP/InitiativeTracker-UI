@@ -1,14 +1,29 @@
 import "./DashboardCard.css";
 import React, { useLayoutEffect, useContext, useState, useEffect } from "react";
 import axios from "axios";
+
 export default function DashboardCard() {
-  const [ideas, setIdeas] = useState([]);
+  const [ideaTitle, setIdeasTitle] = useState([]);
+  const [maxLike, setmaxLike] = useState([]);
+  const [highestlike, sethighestlike] = useState([]);
   useEffect(() => {
     axios
       .get(`https://localhost:7265/api/Idea/highestlike`)
       .then((response) => {
         console.log(response.data);
-        setIdeas(response.data);
+        setIdeasTitle(response.data);
+      });
+    axios
+      .get(`https://localhost:7265/api/Idea/highestlike`)
+      .then((response) => {
+        console.log(response.data);
+        setmaxLike(response.data);
+      });
+    axios
+      .get(`https://localhost:7265/api/Idea/Numberofpost`)
+      .then((response) => {
+        console.log(response.data);
+        sethighestlike(response.data);
       });
   }, []);
 
@@ -16,7 +31,7 @@ export default function DashboardCard() {
     <div className="CardContainer">
       <div className="Card">
         <div className="DashboardCard-cont">
-          <h2 className="Color">1500</h2>
+          <h2 className="Color">{maxLike.likes}</h2>
           <h5 className="color2">Most liked post</h5>
         </div>
         <img
@@ -24,12 +39,12 @@ export default function DashboardCard() {
           src="https://cdn-icons-png.flaticon.com/128/2854/2854304.png"
         ></img>
         <div className="name color3">
-          <p>{ideas.title}</p>
+          <p>{ideaTitle.title}</p>
         </div>
       </div>
       <div className="Card">
         <div>
-          <h2 className="Color">9.4</h2>
+          <h2 className="Color">{highestlike?.highestrating?.rating}</h2>
           <h5 className="color2">Most rated User</h5>
         </div>
         <img
@@ -37,12 +52,12 @@ export default function DashboardCard() {
           src="https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png"
         ></img>
         <div className="name color3">
-          <p>Abcd</p>
+          <p>{highestlike?.highestrating?.name}</p>
         </div>
       </div>
       <div className="Card">
         <div>
-          <h2 className="Color">120</h2>
+          <h2 className="Color">{highestlike?.noofpost}</h2>
           <h5 className="color2"> User with Post</h5>
         </div>
         <img
@@ -50,7 +65,9 @@ export default function DashboardCard() {
           src="https://static.thenounproject.com/png/141508-200.png"
         ></img>
         <div className="name color3">
-          <p>Abcd</p>
+          {highestlike?.groupby?.map((nameOfPerson) => (
+            <p>{nameOfPerson.name}</p>
+          ))}
         </div>
       </div>
     </div>

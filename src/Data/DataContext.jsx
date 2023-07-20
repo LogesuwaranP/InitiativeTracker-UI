@@ -14,19 +14,14 @@ const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
   const navigate = useNavigate();
+
   const [auth, setAuth] = useState("");
   const [userList, setUserList] = useState([]);
   const [column1Items, setColumn1Items] = useState([]);
   const [column2Items, setColumn2Items] = useState([]);
-  const [column3Items, setColumn3Items] = useState([
-    <IdeaCard />,
-    <IdeaCard />,
-  ]);
+  const [column3Items, setColumn3Items] = useState([]);
   const [column4Items, setColumn4Items] = useState([]);
-  const [column5Items, setColumn5Items] = useState([
-    <IdeaCard />,
-    <IdeaCard />,
-  ]);
+  const [column5Items, setColumn5Items] = useState([]);
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,23 +33,11 @@ export const DataProvider = ({ children }) => {
   const [contributors, setContributors] = useState([]);
   const [data, setData] = useState({});
   const [ideastatus, setideastatus] = useState("");
-  const [message, setMessage] = useState(false);
-  const [messageContent, setmessageContent] = useState(false);
-  const [errorMessage, seterrorMessage] = useState("User not found!");
+
   function checkValues() {
-    console.log("Values checking from context");
-    navigate("/drag");
-    console.log(
-      "user signup===" +
-        "email:" +
-        email +
-        "-userName:" +
-        userName +
-        "-password" +
-        password +
-        "-confirmPassword" +
-        confirmPassword
-    );
+    // console.log("Values checking from context");
+    // console.log("user signup==="+"email:"+email+"-userName:"+userName+"-password"+password+"-confirmPassword"+confirmPassword)
+    console.log(column1Items);
   }
 
   // useEffect(()=>{
@@ -82,31 +65,13 @@ export const DataProvider = ({ children }) => {
       })
       .then((response) => {
         console.log(response.data);
-        setMessage(true);
-        response.data && setmessageContent(true);
-        response.data && seterrorMessage("Login Success");
-
-        setTimeout(() => {
-          setMessage(false);
-          if (response.data) {
-            setmessageContent(false);
-          }
-        }, 3000);
-        console.log("In lmessage");
-        navigate("/");
         setAuth(response.data);
+        if (response.data) {
+          navigate("/");
+        }
       })
       .catch((errors) => {
-        console.log(errors.response.data);
-        if (errors.response.data == "User and Password combo is wrong") {
-          seterrorMessage("User and Password combo is wrong");
-        } else if (errors.response.data == "user not found") {
-          seterrorMessage("User not found");
-        }
-        setMessage(true);
-        setTimeout(() => {
-          setMessage(false);
-        }, 3000);
+        alert(errors.response.data);
       });
   }
 
@@ -114,7 +79,12 @@ export const DataProvider = ({ children }) => {
     var array = [];
     data.map((item) => {
       array.push(
-        <IdeaCard id={item.id} title={item.title} status={item.status} />
+        <IdeaCard
+          id={item.id}
+          title={item.title}
+          status={item.status}
+          like={item.like}
+        />
       );
       return 1;
     });
@@ -125,7 +95,12 @@ export const DataProvider = ({ children }) => {
     var array = [];
     data.map((item) => {
       array.push(
-        <IdeaCard id={item.TaskId} title={item.Title} status={item.Status} />
+        <IdeaCard
+          id={item.TaskId}
+          title={item.Title}
+          status={item.Status}
+          like={item.like}
+        />
       );
       return 1;
     });
@@ -136,18 +111,16 @@ export const DataProvider = ({ children }) => {
     axios
       .get("https://localhost:7265/api/Idea/newidea")
       .then((response) => {
-        console.log(response.data);
         asign1(response.data);
       })
-      .catch(errors);
-    {
-      console.log(errors);
-    }
+      .catch((errors) => {
+        console.log(errors);
+      });
 
-    // axios.get("https://64af058ec85640541d4e0a7b.mockapi.io/tracker/progress").then((response)=>{
-    //     console.log(response.data);
-    //     asign2(response.data);
-    // })
+    axios.get("https://localhost:7265/api/Idea/todo").then((response) => {
+      console.log(response.data);
+      asign2(response.data);
+    });
   }, []);
   return (
     <DataContext.Provider
@@ -189,11 +162,6 @@ export const DataProvider = ({ children }) => {
         setContributors,
         data,
         setData,
-        message,
-        setMessage,
-        messageContent,
-        errorMessage,
-        seterrorMessage,
       }}
     >
       {children}
