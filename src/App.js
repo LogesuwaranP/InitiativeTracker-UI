@@ -12,6 +12,7 @@ import Sidebar from './Nav/Nav';
 import Profile from './Components/Profile/Profile';
 import  Dashboard  from './Components/Dasboard/Dashboard';
 import MessageBox from './Components/MessageBox/MessageBox';import Userprofile from './Components/Userprofile/Userprofile';
+import Admin from './Components/Admin/Admin';
 
 
 
@@ -30,7 +31,7 @@ function App() {
         <Route path='/login' element={<Authentication/>}/>
         <Route path='/idea-detailes/:id' element={<DetailedView/>}/>
         <Route path="/profile-edit" element={<EditProfile/>}/>
-        <Route path='/users' element={<UserPage/>}/>
+        <Route path='/users' element={<Admin/>}/>
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/userprofile' element={<Userprofile/>}/><Route path='/Dashboard' element={<Dashboard/>}/>
         <Route path='/MessageBox' element={<MessageBox text={"success"}/>}/>

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import StarRating from './StarRating';
+import React, { useState } from "react";
+import StarRating from "./StarRating";
 
-const Rating = () => {
+const Rating = ({ setStarRating, starRating, val }) => {
   const [rating, setRating] = useState(0);
 
   const handleSelect = (selectedRating) => {
@@ -11,7 +11,7 @@ const Rating = () => {
       setRating(0);
     } else {
       // Otherwise, set the rating to the selected value
-      setRating(selectedRating);
+      setStarRating(selectedRating);
     }
   };
 
@@ -20,7 +20,7 @@ const Rating = () => {
       {[1, 2, 3, 4, 5].map((value) => (
         <StarRating
           key={value}
-          selected={value <= rating}
+          selected={value <= starRating}
           onSelect={() => handleSelect(value)}
         />
       ))}

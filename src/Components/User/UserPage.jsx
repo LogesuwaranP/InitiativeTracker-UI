@@ -1,27 +1,15 @@
-import React, { useEffect } from 'react'
-import UserCard from './UserCard'
-import Userprofile from '../Userprofile/Userprofile'
+import React, { useEffect } from "react";
+import UserCard from "./UserCard";
+import Userprofile from "../Userprofile/Userprofile";
 
 function UserPage() {
-
-
-    useEffect(()=>{
-        
-
-    },[])
+  useEffect(() => {}, []);
 
   return (
-    <div className='user-page-main'>
-      <UserCard/>
-      <UserCard/>
-      <UserCard/>
-      <UserCard/>
-      <UserCard/>
-      <UserCard/>
-      <UserCard/>
-      <UserCard/>
+    <div className="user-page-main">
+      {/* <UserCard /> */}
     </div>
-  )
+  );
 }
 
-export default UserPage
+export default UserPage;

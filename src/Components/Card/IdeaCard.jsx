@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useEffect, useState } from "react";
 import "./IdeaCard.css";
 import { useNavigate } from "react-router-dom";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -11,10 +11,19 @@ import Badge from "@mui/material/Badge";
 const IdeaCard = ({ id, title, status, like }) => {
   const navigate = useNavigate();
   console.log(title, id, status);
+  const [ideaLike, setideaLike] = useState();
+  useEffect(() => {
+    axios.get(`https://localhost:7265/api/Idea/${id}`).then((res) => {
+      setideaLike(res.data);
+    });
+  }, []);
 
   function IncreaseLike() {
     axios.put(`https://localhost:7265/api/Idea/like/${id}`).then((response) => {
       console.log(response);
+      axios.get(`https://localhost:7265/api/Idea/${id}`).then((res) => {
+        setideaLike(res.data);
+      });
     });
   }
   return (
@@ -24,7 +33,7 @@ const IdeaCard = ({ id, title, status, like }) => {
       <div className="ideacard-icon">
         <div>
           <IconButton color="primary" onClick={IncreaseLike}>
-            <Badge badgeContent={like} color="primary">
+            <Badge badgeContent={ideaLike?.like} color="primary">
               <FavoriteIcon color="primary" />
             </Badge>
           </IconButton>
