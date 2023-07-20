@@ -3,10 +3,10 @@ import React,{useContext} from 'react'
 import DataContext from '../../Data/DataContext';
 
 const NewIdea = () => {
-  const {userList} = useContext(DataContext);
+  const {list} = useContext(DataContext);
   var emailArray =[];
 
-    userList.map((user)=>{
+    list.map((user)=>{
       emailArray.push(user.email);
     })
 

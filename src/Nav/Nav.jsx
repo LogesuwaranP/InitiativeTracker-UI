@@ -43,62 +43,69 @@ const Sidebar = () => {
                   </li>
                 </ul>
               </li>
-            </Link>
+          </Link>
+          
 
-            <Link to="/profile">
+          <Link to='/profile'> 
+            <li>
+              <a>
+                <i className="bx bx-line-chart"></i>
+    
+                <span className="link_name">Chart</span>
+              </a>
+    
+              <ul className={`sub-menu ${showMenu ? "" : "blank"}`}>
+                <li>
+                  <a className="link_name">
+                    Chart
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </Link>
+          
+          {
+            auth.role=="Approver"?
+            (<Link to="/approve">
               <li>
                 <a>
-                  <i className="bx bx-line-chart"></i>
-
-                  <span className="link_name">Chart</span>
+                  <i className="bx bx-compass"></i>
+                  <i class="bi bi-check"></i>
+                  <span className="link_name">Pending</span>
                 </a>
-
+      
                 <ul className={`sub-menu ${showMenu ? "" : "blank"}`}>
                   <li>
-                    <a className="link_name">Chart</a>
+                    <a className="link_name">
+                      Pending
+                    </a>
                   </li>
                 </ul>
               </li>
-            </Link>
+            </Link>):<></>
+           }
 
-            {auth.role == "Approver" ? (
-              <Link>
+          {
+            auth.role=="Admin"?
+            <Link to="/users">  
+            <li>
+              <a>
+                <i className="bx bx-history"></i>
+    
+                <span className="link_name">Users</span>
+              </a>
+    
+              <ul className={`sub-menu ${showMenu ? "" : "blank"}`}>
                 <li>
-                  <a>
-                    <i className="bx bx-compass"></i>
-                    <span className="link_name">Pending</span>
+                  <a className="link_name">
+                    Users
                   </a>
-
-                  <ul className={`sub-menu ${showMenu ? "" : "blank"}`}>
-                    <li>
-                      <a className="link_name">Pending</a>
-                    </li>
-                  </ul>
                 </li>
-              </Link>
-            ) : (
-              <></>
-            )}
+              </ul>
+            </li>
+            </Link>:<></>
+          }
 
-            {auth.role == "Admin" ? (
-              <Link to="/users">
-                <li>
-                  <a>
-                    <i className="bx bx-history"></i>
-
-                    <span className="link_name">History</span>
-                  </a>
-
-                  <ul className={`sub-menu ${showMenu ? "" : "blank"}`}>
-                    <li>
-                      <a className="link_name">History</a>
-                    </li>
-                  </ul>
-                </li>
-              </Link>
-            ) : (
-              <></>
-            )}
 
             <Link to="/profile-edit">
               <li>

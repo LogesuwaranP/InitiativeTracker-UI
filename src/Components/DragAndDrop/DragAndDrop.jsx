@@ -11,10 +11,11 @@ const DragAndDrop = () => {
   console.log(auth);
   useLayoutEffect(() => {
     authMiddleware();
-  }, []);
-  const [inProgress, setProgress] = useState([]);
 
-  const [toggle, setToggle] = useState(false);
+  },[])
+  
+
+  const[toggle, setToggle] =  useState(false)
   const [draggingItem, setDraggingItem] = useState(null);
   const {
     column1Items,
@@ -143,23 +144,24 @@ const DragAndDrop = () => {
           break;
         }
 
-        case "In Progress": {
-          setColumn3Items([...column3Items, draggingItem.item]);
-          axios
-            .put("https://localhost:7265/api/Idea/update/id", {
-              id: draggingItem.item.props.id,
-              status: "In Progress",
+        case "In Progress":
+          {
+            
+            axios.put('https://localhost:7265/api/Idea/update/id', {
+              id:draggingItem.item.props.id,
+              status:"In Progress"
             })
-            .then((response) => console.log(response));
-          break;
-        }
+              .then(response =>  setColumn3Items([...column3Items, draggingItem.item]));
+            break;
+          }
+         
 
-        case "In Review": {
-          setColumn4Items([...column4Items, draggingItem.item]);
-          axios
-            .put("https://localhost:7265/api/Idea/update/id", {
-              id: draggingItem.item.props.id,
-              status: "In Review",
+        case "In Review":
+          {
+            setColumn4Items([...column4Items, draggingItem.item]);
+            axios.put('https://localhost:7265/api/Idea/update/id', {
+              id:draggingItem.item.props.id,
+              status:"In Review"
             })
             .then((response) => console.log(response));
           break;
@@ -221,104 +223,96 @@ const DragAndDrop = () => {
 
   return (
     <div className="scrolling-wrapper-flexbox">
-      {toggle ? (
-        <CreateIdea setToggle={setToggle} />
-      ) : (
-        <div
-          className="btn-create"
-          onClick={() => {
-            setToggle(true);
-          }}
-        >
-          +
-        </div>
-      )}
-
-      <div className="container">
-        <div
-          className="main-column"
+      {toggle?<CreateIdea setToggle={setToggle}/>:<div className="btn-create" onClick={()=>{setToggle(true)}}>+</div>}
+    
+    <div className="container"
+      style={{userSelect:"none"}} 
+    >      
+      <div className="main-column"   
+            
           onDragOver={handleDragOver}
           onDrop={(e) => handleDrop(e, "New Idea")}
-        >
-          <h2 onClick={checkValues}>New Idea</h2>
-          <div className="column">
-            {column1Items.map((item, index) => (
-              <div
-                key={index}
-                className="item"
-                // draggable
-                onDragStart={(e) => handleDragStart(e, item, "New Idea")}
-                onDragEnd={handleDragEnd}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
+      >
+        <h2 onClick={checkValues}>New Idea</h2>
+        <div className="column">
+          {column1Items.map((item, index) => (
+            <div
+              
+              key={index}
+              className="item"
+              // draggable
+              onDragStart={(e) => handleDragStart(e, item, "New Idea")}
+              onDragEnd={handleDragEnd}
+            >
+              {item}
+            </div>
+          ))}
         </div>
+      </div>
 
-        <div
-          className="main-column"
-          onDragOver={handleDragOver}
-          onDrop={(e) => handleDrop(e, "To Do")}
-        >
-          <h2>To Do</h2>
-          <div className="column">
-            {column2Items.map((item, index) => (
-              <div
-                key={index}
-                className="item"
-                draggable
-                onDragStart={(e) => handleDragStart(e, item, "To Do")}
-                onDragEnd={handleDragEnd}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
+      <div className="main-column"
+        onDragOver={handleDragOver}
+        onDrop={(e) => handleDrop(e, "To Do")}
+      >
+        <h2>To Do</h2>
+        <div className="column">       
+          {column2Items.map((item, index) => (
+            <div
+              key={index}
+              className="item"
+              draggable={auth.role=="Admin"||item?.role?.props?.name==auth.name?"true":"false"}
+              onDragStart={(e) => handleDragStart(e, item, "To Do")}
+              onDragEnd={handleDragEnd}
+            >
+              {item}
+            </div>
+          ))}
         </div>
+      </div>
 
-        <div
-          className="main-column"
-          onDragOver={handleDragOver}
-          onDrop={(e) => handleDrop(e, "In Progress")}
-        >
-          <h2>In Progress</h2>
-          <div className="column">
-            {column3Items.map((item, index) => (
-              <div
-                key={index}
-                className="item"
-                draggable
-                onDragStart={(e) => handleDragStart(e, item, "In Progress")}
-                onDragEnd={handleDragEnd}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
+      <div className="main-column"
+        onDragOver={handleDragOver}
+        onDrop={(e) => handleDrop(e, "In Progress")}
+      >
+        <h2>In Progress</h2>
+        <div className="column">
+          {column3Items.map((item, index) => (
+            <div
+              key={index}
+              className="item"
+              draggable={auth.role=="Admin"||item?.role?.props?.name==auth.name?"true":"false"}
+              
+              // {authdraggable}
+              onDragStart={(e) => handleDragStart(e, item, "In Progress")}
+              onDragEnd={handleDragEnd}
+            >
+              {item}
+            </div>
+          ))}
         </div>
+      </div>
 
-        <div
-          className="main-column"
-          onDragOver={handleDragOver}
-          onDrop={(e) => handleDrop(e, "In Review")}
-        >
-          <h2>In Review</h2>
-          <div className="column">
-            {column4Items.map((item, index) => (
-              <div
-                key={index}
-                className="item"
-                draggable={auth.role == "Admin" ? "true" : "false"}
-                // {authdraggable}
-                onDragStart={(e) => handleDragStart(e, item, "In Review")}
-                onDragEnd={handleDragEnd}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
+      <div className="main-column"
+        onDragOver={handleDragOver}
+        onDrop={(e) => handleDrop(e, "In Review")}
+      >
+        <h2>In Review</h2>
+        <div className="column">
+          {column4Items.map((item, index) => (
+            <div
+              key={index}
+              className="item"
+              draggable={auth.role=="Admin"||item?.role?.props?.name==auth.name?"true":"false"}
+              
+              // {authdraggable}
+              onDragStart={(e) => handleDragStart(e, item, "In Review")}
+              onDragEnd={handleDragEnd}
+            >
+              {item}
+            </div>
+          ))}
         </div>
+      </div>
 
         <div
           className="main-column"

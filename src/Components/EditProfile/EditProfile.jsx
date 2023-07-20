@@ -9,30 +9,51 @@ import DataContext from "../../Data/DataContext";
 import axios from "axios";
 
 const EditProfile = () => {
-  const { authMiddleware, auth } = useContext(DataContext);
-  console.log(auth.id);
-  useLayoutEffect(() => {
-    authMiddleware();
-  }, []);
 
-  const [user, setUser] = useState({});
-  useEffect(() => {
-    axios.get(`https://localhost:7265/api/User`).then((response) => {
-      setUser(response.data.value[auth.id - 1]);
-      //console.log(response.data);
-    });
+    const {authMiddleware,auth} = useContext(DataContext);
+    console.log(auth.id);
+    useLayoutEffect(()=>{
+        authMiddleware();
 
-    //console.log(auth);
-  }, []);
-  const [updatedData, setUpdatedData] = useState("");
-  const [secondaryEmail, setSecondaryEmail] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [bloodGroup, setBloodGroup] = useState("");
-  const [linkedIn, setLinkedIn] = useState("");
-  const [instagram, setInstagram] = useState("");
-  const [bio, setBio] = useState("");
+    },[])
 
+
+
+const [user, setUser] = useState({});
+
+useEffect(() => {
+    axios
+       .get(`https://localhost:7265/api/User`)
+       .then((response) => {
+          setUser(response.data.value[auth.id-1]);
+          //console.log(response.data);
+       
+       })
+
+       //console.log(auth);
+ }, []);
+
+//  useEffect(() => {
+//     axios
+//        .put(`https://localhost:7265/api/User/updatedetails/${id}`)
+//        .then((response) => {
+//           setupdateUser(response.info);
+       
+//        })
+//  }, []);
+
+
+const [bio, setBio] = useState('');
+// const [id1, setid1] = useState('');
+
+
+
+  
   const updateData = async () => {
+
+    const alldata = {...user, bio:bio};
+    console.log(alldata, bio);
+      await axios.put(`https://localhost:7265/api/User/updatedetails/${auth.id}`, alldata).then((response)=>{
     await axios
       .put(`https://localhost:7265/api/User/updatedetails/${auth.id}`, {
         ...user,

@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
+import { ExportToExcel } from "../../schemas/ExportToExcel";
+import Tooltip from '@mui/material/Tooltip';
 const DetailedView = () => {const ddData = [
   { text: "A4", value: "size-a4" },
 ];
@@ -16,6 +18,7 @@ const [layoutSelection, setLayoutSelection] = useState({
   text: "A4",
   value: "size-a4"
 });
+
 
 const updatePageLayout = event => {
   setLayoutSelection(event.target.value);
@@ -28,7 +31,7 @@ const handleExportWithComponent = event => {
 };
 
   const {id} = useParams();
-  const {authMiddleware, data, setData} = useContext(DataContext);
+  const {authMiddleware, data, setData ,summary, setSummary, list, setList,auth} = useContext(DataContext);
   
   useLayoutEffect(()=>{
     authMiddleware();
@@ -39,9 +42,40 @@ const handleExportWithComponent = event => {
     axios.get(`https://localhost:7265/api/Idea/${id}`).then((response)=>{
       setData(response.data);
       console.log(response.data);
-      
+    })
+    axios.get("https://localhost:7265/api/Comments").then((response)=>{
+      setList(response.data)
     })
   },[])
+
+
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    axios.post("https://localhost:7265/api/Comments", 
+    {
+      taskid:id,
+      comment:summary,
+      userId:auth.id
+    }).then((response)=>{
+      axios.get("https://localhost:7265/api/Comments").then((response)=>{
+        setList(response.data);
+        setSummary(" ")
+      })
+      console.log(response.data);  
+          
+    })
+    
+
+  }
+  const [data1, setData1] = React.useState([])
+  const fileName = "mysamplefile"; // here enter filename for your excel file
+
+  React.useEffect(() => {
+    const fetchData = () =>{
+     axios.get('https://localhost:7265/api/Idea/excel').then(r => setData1(r.data) )
+    }
+    fetchData()
+  }, [])
   return (
     <>
     <PDFExport ref={pdfExportComponent}>
@@ -50,7 +84,7 @@ const handleExportWithComponent = event => {
       <div className="detailed-content">
         <div className="detailed-content-main">
           <h2>{data.title}</h2>
-          <div className='submit-idea'> <div className='SUBMIT' primary={true} onClick={handleExportWithComponent}>Download</div> </div>
+          <div className='submit-idea-details'> <ExportToExcel apiData={data1} fileName={fileName} /><Tooltip title="Download"><i class='bi bi-cloud-arrow-down' primary={true} onClick={handleExportWithComponent} style={{fontSize:"24px"}}/> </Tooltip></div>
           <div className="detailed-all">
             <div>
               <h4>Owner</h4>
@@ -106,10 +140,25 @@ const handleExportWithComponent = event => {
       </div>
       <div className="detailed-comments">
         <div>
-          <form>
-            <input placeholder="Enter Comments"/>
+          <form onSubmit={handleSubmit}>
+            <input value={summary} placeholder="Enter Comments" onChange={(e)=>setSummary(e.target.value)}/>
           </form>          
-          <div><CommentCard/></div>
+          <div>
+            {
+              list.map((l)=>{console.log(l);return(
+                
+                <CommentCard
+                  name={l.user}
+                  comments={l.comments}
+                  commentsDate={l.commentsDate}
+                  
+
+                 />
+
+              )})
+            }
+            
+          </div>
         </div>
       </div>
     </div>

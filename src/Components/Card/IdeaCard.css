@@ -11,6 +11,12 @@
     margin-top: 10px;
     border-left: 5px solid rgb(0, 132, 255) ;
     border-radius: 5px ;
+
+}
+
+.ideacard-container:hover{
+    cursor: pointer;
+    
 }
 
 .ideacard-icon{
