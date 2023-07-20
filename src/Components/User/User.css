@@ -126,23 +126,10 @@ gap: 40px;
 }
 
 .usercard-edit {
-  background-color: #091644;
-
-  font-family: 'Poppins', sans-serif;
-
-  border-radius: 5px;
-
-  font-size: 16px;
-
-  font-weight: 500;
-
-  color: #fff;
+   width: 100px;
+   height: 30px;
 }
 
-.usercard-edit:hover {
-  cursor: pointer;
-  background-color: #1c55be;
-}
 
 .usercard-badge {
   color: #3b6ccf;

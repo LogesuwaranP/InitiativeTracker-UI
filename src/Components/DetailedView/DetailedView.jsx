@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
+
+
 const DetailedView = () => {const ddData = [
   { text: "A4", value: "size-a4" },
 ];
@@ -16,6 +18,7 @@ const [layoutSelection, setLayoutSelection] = useState({
   text: "A4",
   value: "size-a4"
 });
+
 
 const updatePageLayout = event => {
   setLayoutSelection(event.target.value);
@@ -28,7 +31,7 @@ const handleExportWithComponent = event => {
 };
 
   const {id} = useParams();
-  const {authMiddleware, data, setData} = useContext(DataContext);
+  const {authMiddleware, data, setData ,summary, setSummary, list, setList,auth} = useContext(DataContext);
   
   useLayoutEffect(()=>{
     authMiddleware();
@@ -39,9 +42,31 @@ const handleExportWithComponent = event => {
     axios.get(`https://localhost:7265/api/Idea/${id}`).then((response)=>{
       setData(response.data);
       console.log(response.data);
-      
+    })
+    axios.get("https://localhost:7265/api/Comments").then((response)=>{
+      setList(response.data)
     })
   },[])
+
+
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    axios.post("https://localhost:7265/api/Comments", 
+    {
+      taskid:id,
+      comment:summary,
+      userId:auth.id
+    }).then((response)=>{
+      axios.get("https://localhost:7265/api/Comments").then((response)=>{
+        setList(response.data);
+        setSummary(" ")
+      })
+      console.log(response.data);  
+          
+    })
+    
+
+  }
   return (
     <>
     <PDFExport ref={pdfExportComponent}>
@@ -106,10 +131,25 @@ const handleExportWithComponent = event => {
       </div>
       <div className="detailed-comments">
         <div>
-          <form>
-            <input placeholder="Enter Comments"/>
+          <form onSubmit={handleSubmit}>
+            <input value={summary} placeholder="Enter Comments" onChange={(e)=>setSummary(e.target.value)}/>
           </form>          
-          <div><CommentCard/></div>
+          <div>
+            {
+              list.map((l)=>{console.log(l);return(
+                
+                <CommentCard
+                  name={l.user}
+                  comments={l.comments}
+                  commentsDate={l.commentsDate}
+                  
+
+                 />
+
+              )})
+            }
+            
+          </div>
         </div>
       </div>
     </div>

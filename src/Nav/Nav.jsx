@@ -69,11 +69,12 @@ const Sidebar = () => {
           </Link>
           
           {
-            auth.role="Approver"?
-            <Link>
+            auth.role=="Approver"?
+            (<Link to="/approve">
               <li>
                 <a>
                   <i className="bx bx-compass"></i>
+                  <i class="bi bi-check"></i>
                   <span className="link_name">Pending</span>
                 </a>
       
@@ -85,7 +86,7 @@ const Sidebar = () => {
                   </li>
                 </ul>
               </li>
-            </Link>:<></>
+            </Link>):<></>
            }
 
           {
@@ -95,13 +96,13 @@ const Sidebar = () => {
               <a>
                 <i className="bx bx-history"></i>
     
-                <span className="link_name">History</span>
+                <span className="link_name">Users</span>
               </a>
     
               <ul className={`sub-menu ${showMenu ? "" : "blank"}`}>
                 <li>
                   <a className="link_name">
-                    History
+                    Users
                   </a>
                 </li>
               </ul>

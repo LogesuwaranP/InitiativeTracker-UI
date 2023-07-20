@@ -35,9 +35,9 @@ const Card = () => {
           </div>
           <div className='usercard-bio'>professionally qualified fire engineer with 7 years experience.</div>
           <div className='usercard-button'>
-            <button className='usercard-edit' onClick={handleFlip}>
+            <div className='usercard-edit SUBMIT' onClick={handleFlip}>
             Edit
-            </button>
+            </div>
           </div>
         </div>
         <div className='usercard-back'>

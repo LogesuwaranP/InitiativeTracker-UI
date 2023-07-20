@@ -5,6 +5,7 @@ import DataContext from "../../Data/DataContext";
 import { useContext } from "react";
 import AnimatedMulti from "../CuzDrop/DropDown";
 import axios from "axios";
+import errors from "validators/lib/errors";
 
 const CreateIdea = ({ setToggle }) => {
   const [selectedItems, setSelectedItems] = useState([]);
@@ -33,7 +34,10 @@ const CreateIdea = ({ setToggle }) => {
       idOfContributors:[1]
 
     }).then((response)=>{
+      setToggle(false)
       console.log(response.data);
+    }).catch((errors)=>{
+      console.log(errors);
     })
     console.log(contributors);
   }

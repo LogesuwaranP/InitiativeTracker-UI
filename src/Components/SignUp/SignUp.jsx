@@ -49,7 +49,7 @@ const SignUp = () => {
             } ).then((response)=>{
                 console.log(response.data);
                 navigate("/");
-                //setUserList(response.data);
+
             })
             
           }

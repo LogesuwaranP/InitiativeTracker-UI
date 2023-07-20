@@ -16,7 +16,7 @@ export const DataProvider = ({children}) => {
     const navigate = useNavigate();
 
     const [auth, setAuth] = useState('');
-    const [userList, setUserList] = useState([]);
+    const [list, setList] = useState([]);
     const [column1Items, setColumn1Items] = useState([]);
     const [column2Items, setColumn2Items] = useState([]);
     const [column3Items, setColumn3Items] = useState([]);
@@ -44,20 +44,16 @@ export const DataProvider = ({children}) => {
     // useEffect(()=>{
     //     axios.get("https://localhost:7265/api/User").then((response)=>{
     //         //  console.log(response.data);
-    //         // setUserList(response.data);
+    //         // setList(response.data);
     //     })
     //     console.log(auth);
     // },[])
 
     function authMiddleware() {
-            console.log(auth);
-            if(!auth)
-            {
-              navigate("/login")
-            }
-            else{
-                console.log(auth);
-            }               
+      if(!auth)
+      {
+        navigate("/login")
+      }            
     }
 
     function authUser() {
@@ -90,18 +86,16 @@ export const DataProvider = ({children}) => {
     setColumn1Items(array);
   }
 
-    function asign2(data) {
-        var array = [];
-        data.map((item)=>{
-            array.push(<IdeaCard 
-                id={item.TaskId}
-                title={item.Title}
-                status={item.Status}
-                />);
-                return 1;
-        })
-        setColumn2Items(array);        
-    }
+  function asign2(data) {
+    var array = [];
+    data.map((item) => {
+      array.push(
+        <IdeaCard id={item.id} title={item.title} status={item.status} />
+      );
+      return 1;
+    });
+    setColumn2Items(array);
+  }
 
     useEffect(()=>{
         axios.get("https://localhost:7265/api/Idea/newidea").then((response)=>{
@@ -119,7 +113,7 @@ export const DataProvider = ({children}) => {
     return (
         <DataContext.Provider value={{
             auth, setAuth,
-            userList, setUserList,
+            list, setList,
             column1Items, setColumn1Items,
             column2Items, setColumn2Items,
             column3Items, setColumn3Items,
@@ -136,7 +130,8 @@ export const DataProvider = ({children}) => {
             summary, setSummary,
             discription,setDescription,
             contributors,setContributors,
-            data, setData          
+            data, setData
+            
 
 
         }}>{children}</DataContext.Provider>

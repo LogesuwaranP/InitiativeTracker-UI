@@ -20,26 +20,9 @@ const EditProfile = () => {
     },[])
 
 
-//       const[user, setUser] = useState({});
-//       function getUserdetails(){
-       
 
-//             axios.get("https://localhost:7265/api/User").then((res)=>{
-//                 // console.log(res , "hello");
-//                 const temp = {...res?.data?.value}
-//                 // setUser(temp)
-//                 // console.log(user, "khaass");
-//                 // return temp;
-//                 setUser (temp);
-//                 console.log(user);
-//             })
-            
-//         }
-
-// useEffect(() =>{
-// getUserdetails();
-// },[])
 const [user, setUser] = useState({});
+
 useEffect(() => {
     axios
        .get(`https://localhost:7265/api/User`)
@@ -61,56 +44,18 @@ useEffect(() => {
 //        })
 //  }, []);
 
-const [updatedData, setUpdatedData] = useState('');
-const [secondaryEmail, setSecondaryEmail] = useState('');
-const [dateOfBirth, setDateOfBirth] = useState('');
-const [bloodGroup, setBloodGroup] = useState('');
-const [linkedIn, setLinkedIn] = useState('');
-const [instagram, setInstagram] = useState('');
+
 const [bio, setBio] = useState('');
 // const [id1, setid1] = useState('');
 
 
-// const handleId1 = event => {
-//    setid1(id1=id);
-//   };
-// id1=id;
-//   console.log(id1 + "id1")
-// const handleInputChange = event => {
-//     setUpdatedData(event.target.value);
-//   };
-  
-//   const handleSecondaryEmailChange = event => {
-//     setSecondaryEmail(event.target.value);
-//   };
-  
- 
-//   const handleDateOfBirthChange = event => {
-//     setDateOfBirth(event.target.value);
-//   };
-  
 
-//   const handleBloodGroupChange = event => {
-//     setBloodGroup(event.target.value);
-//   };
-  
-//   const handleLinkedInChange = event => {
-//     setLinkedIn(event.target.value);
-//   };
-  
-  
-//   const handleInstagramChange = event => {
-//     setInstagram(event.target.value);
-//   };
- 
-//   const handleBioChange = event => {
-//     setBio(event.target.value);
-//   };
   
   const updateData = async () => {
 
-
-      await axios.put(`https://localhost:7265/api/User/updatedetails/${auth.id}`, {...user, bio:bio}).then((response)=>{
+    const alldata = {...user, bio:bio};
+    console.log(alldata, bio);
+      await axios.put(`https://localhost:7265/api/User/updatedetails/${auth.id}`, alldata).then((response)=>{
         console.log(response);
       }).catch((error)=>{
         alert("Line 123")

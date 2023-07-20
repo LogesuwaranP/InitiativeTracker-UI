@@ -14,7 +14,6 @@ const DragAndDrop = () => {
     authMiddleware();
 
   },[])
-  const[inProgress, setProgress] = useState([]);
   
 
   const[toggle, setToggle] =  useState(false)
@@ -137,12 +136,12 @@ const DragAndDrop = () => {
 
         case "In Progress":
           {
-            setColumn3Items([...column3Items, draggingItem.item]);
+            
             axios.put('https://localhost:7265/api/Idea/update/id', {
               id:draggingItem.item.props.id,
               status:"In Progress"
             })
-              .then(response =>  console.log(response));
+              .then(response =>  setColumn3Items([...column3Items, draggingItem.item]));
             break;
           }
          
@@ -216,8 +215,11 @@ const DragAndDrop = () => {
     <div className="scrolling-wrapper-flexbox">
       {toggle?<CreateIdea setToggle={setToggle}/>:<div className="btn-create" onClick={()=>{setToggle(true)}}>+</div>}
     
-    <div className="container">
-      <div className="main-column"      
+    <div className="container"
+      style={{userSelect:"none"}} 
+    >      
+      <div className="main-column"   
+            
           onDragOver={handleDragOver}
           onDrop={(e) => handleDrop(e, "New Idea")}
       >
@@ -225,6 +227,7 @@ const DragAndDrop = () => {
         <div className="column">
           {column1Items.map((item, index) => (
             <div
+              
               key={index}
               className="item"
               // draggable
@@ -247,7 +250,7 @@ const DragAndDrop = () => {
             <div
               key={index}
               className="item"
-              draggable
+              draggable={auth.role=="Admin"||item?.role?.props?.name==auth.name?"true":"false"}
               onDragStart={(e) => handleDragStart(e, item, "To Do")}
               onDragEnd={handleDragEnd}
             >
@@ -262,12 +265,14 @@ const DragAndDrop = () => {
         onDrop={(e) => handleDrop(e, "In Progress")}
       >
         <h2>In Progress</h2>
-        <div className="column">       
+        <div className="column">
           {column3Items.map((item, index) => (
             <div
               key={index}
               className="item"
-              draggable
+              draggable={auth.role=="Admin"||item?.role?.props?.name==auth.name?"true":"false"}
+              
+              // {authdraggable}
               onDragStart={(e) => handleDragStart(e, item, "In Progress")}
               onDragEnd={handleDragEnd}
             >
@@ -287,7 +292,7 @@ const DragAndDrop = () => {
             <div
               key={index}
               className="item"
-              draggable={auth.role=="Admin"?"true":"false"}
+              draggable={auth.role=="Admin"||item?.role?.props?.name==auth.name?"true":"false"}
               
               // {authdraggable}
               onDragStart={(e) => handleDragStart(e, item, "In Review")}

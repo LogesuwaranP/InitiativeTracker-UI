@@ -12,14 +12,10 @@ function UserPage() {
 
   return (
     <div className='user-page-main'>
-      <UserCard/>
-      <UserCard/>
-      <UserCard/>
-      <UserCard/>
-      <UserCard/>
-      <UserCard/>
-      <UserCard/>
-      <UserCard/>
+      {
+        
+      }
+      
     </div>
   )
 }
